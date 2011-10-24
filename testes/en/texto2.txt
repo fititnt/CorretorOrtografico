@@ -1,0 +1,34 @@
+<pre><p>Marketers See Opportunity as a Web Tool Gains Users
+
+
+THE fledgling R.S.S. business is starting to attract some attention from those catering to Internet advertisers.
+
+Google, Pheedo, Feedster and Yahoo Search Marketing are all peddling advertising options for R.S.S., an increasingly popular way of having a personal computer automatically retrieve information from the Internet.
+
+For example, R.S.S. users interested in local weather could view forecast updates on their computers without having to visit a particular Web site.
+
+Some big companies, like Verizon, are starting to buy space in the R.S.S. information streams, which are selected anonymously and pulled from Web sites by a PC.
+
+R.S.S. may be getting bigger soon. Microsoft has announced that R.S.S. - the abbreviation stands for Really Simple Syndication - will be integrated into its next Windows operating system. Microsoft's announcement makes it more likely that R.S.S., used for years only by the tech-savvy, will become more of a mainstream computer tool. R.S.S. was helped last year when Yahoo put it on My Yahoo pages.
+
+R.S.S. is somewhat like TiVo for the Internet. By letting people have content pulled from Web sites and fed to their own computers automatically, they can then store it for later viewing. The growing number of R.S.S. users has some online publishers - they are now the biggest group of suppliers of R.S.S. feeds - starting to worry that R.S.S. could take eyeballs away from their existing advertisements on the Web.
+
+The washingtonpost.com, part of Washingtonpost.Newsweek Interactive, for example, is considering ways to insert ads into its R.S.S. feeds, which currently include only headlines and links to articles on the paper's own site. &quot;Anytime a medium attracts a large audience, people begin to think through and figure out ways to deliver ads to that audience,&quot; said Tim Ruder, vice president of marketing for Washingtonpost.Newsweek Interactive. &quot;R.S.S. won't be any different in that regard than any other medium.&quot;
+
+R.S.S. feeds from The New York Times include headlines, a brief summary and a link. Visitors to nytimes.com via R.S.S. feeds has soared from about 500,000 a month at the end of 2003, to 7.3 million last April, said Toby Usnik, the New York Times Company's director of public relations.
+
+Google announced a few weeks ago that it would place ads in R.S.S. feeds, using a computerized system to match ads to content. Yahoo Search Marketing, formerly Overture, also uses a computerized system to place R.S.S. ads, then uses an editor to check many of the ad placements. Pheedo, a company that is placing ads in R.S.S. streams for about 100 advertisers, allows the supplier of the feed to decide which ads will appear with its content.
+
+Most R.S.S. feeds - from places like Amazon.com, PBS, the British Broadcasting Corporation, and Craigslist - do not now include advertisements. The feeds themselves, which often include summaries of stories or product offerings, serve as advertisements for the sites' content, and those sites often have ads.
+
+But research is showing that R.S.S. users are often just looking at the feeds, and not the sites where they originate. Google is encouraging content providers to send everything they have, not just headlines, and to include ads only at the end of the feed. &quot;We need to preserve all of the things that are good about R.S.S. feeds right now and also introduce the opportunity for publishers to monetize those feeds,&quot; said Shuman Ghosemajumder, a business product manager at Google.
+
+Companies placing advertisements in R.S.S. feeds say they are still testing, trying to track how many ads are clicked and to decide how much they should pay for the ads. Advertisers are paying anywhere from 50 cents to $1.75 per click to Pheedo for ads. Niche advertisers tend to pay more per click, said Charles M. Smith, president and chief operating officer for Pheedo. The company placing the ad, like Pheedo or Google, and the publisher of the content in an R.S.S. feed share the amount paid by the advertiser for each reader clicking on an ad.
+
+Some R.S.S. advertisers and content suppliers would like the pay rate to be based on how many people view their ads - not how many click on them.
+
+But tracking ad views is difficult, since it is hard to know how many people actually read the R.S.S. feeds they pull in, Mr. Smith said.
+
+He believes R.S.S. ads should be conversational in tone and provide information. &quot;In R.S.S., you're in the mode of absorbing information,&quot; he said. Pheedo has tested R.S.S. ads of various lengths and found that 500-word ads, instead of the shorter search ad length of about 100 words, tend to work better. R.S.S. users like to read most of the pitch in their R.S.S. screen, without having to quickly click to another site, he said.
+
+Advertising agencies said R.S.S. feeds attract a younger, wealthier consumer on average. They said users were desirable because they had signed up for the feeds and want particular content.</p></pre>

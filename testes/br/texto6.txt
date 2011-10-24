@@ -1,0 +1,20 @@
+<pre><p>Vida sem e-mail &eacute; &quot;pior que acidente de carro&quot;
+
+Uma semana sem e-mail &eacute; mais estressante que mudar de casa, sofrer um acidente de carro ou at&eacute; 
+mesmo se casar ou pedir o div&oacute;rcio, relata um estudo feito pela empresa de software Veritas com 
+850 profissionais de tecnologia. Cerca de um ter&ccedil;o dos entrevistados (34%) fez a compara&ccedil;&atilde;o da 
+semana sem e-mail com as cat&aacute;strofes da vida cotidiana. O funcionamento dos sistemas de e-mail 
+s&atilde;o t&atilde;o cr&iacute;ticos que 68% dos entrevistados ficam com raiva quando est&atilde;o h&aacute; pelo menos meia hora 
+sem correio eletr&ocirc;nico - e os gerentes de tecnologia acreditam que seus empregos est&atilde;o em risco 
+se n&atilde;o corrigirem o problema em menos de 24 horas.
+
+Com a tecnologia se tornando cada vez mais cr&iacute;tica para os neg&oacute;cios, os pesquisadores encontraram 
+defici&ecirc;ncias no gerenciamento de sistemas de e-mail, backup e m&eacute;todos de recupera&ccedil;&atilde;o - e essas 
+defici&ecirc;ncias tamb&eacute;m causam stress no ambiente de trabalho. Metade dos entrevistados disse que 
+teria dificuldade ao tentar recuperar e-mails individuais se necess&aacute;rio, embora 99% das companhias 
+fazem c&oacute;pias de seguran&ccedil;a de mais da metade do correio eletr&ocirc;nico. Mas 56% delas dizem que o e-mail 
+est&aacute; fora do back-up automatizado e apenas 18% das companhias disseram ser capazes de recuperar 
+as mensagens de mais de um ano atr&aacute;s - e apenas uma em dez consegue fazer isso com e-mails da semana anterior.
+
+O estudo foi feito com 850 gerentes de tecnologia em companhias com mais de 500 funcion&aacute;rios na Europa, 
+Estados Unidos, Su&iacute;&ccedil;a, &Aacute;frica do Sul, Pol&ocirc;nia e Oriente M&eacute;dio. </p></pre>
