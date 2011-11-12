@@ -10,8 +10,8 @@
 #include <stdlib.h>
 #include "filesys.h"
 #include "userio.h"
-
 #include "cocore.h"
+#include "debug.h"
 
  /**
  * Main function
@@ -19,6 +19,14 @@
  */
 int main()
 {
-    coUserCL();
+    //coUserCL();
+
+    int resultado;
+    resultado = debugFileOpen("C:\\Users\\fititnt\\github\\fititnt\\CorretorOrtografico\\source\\dicionarios\\en.dic");
+    if ( resultado == 1 ){
+        printf("O arquivo pode ser aberto");
+    } else {
+        printf("O arquivo nao pode ser aberto");
+    }
     return 0;
 }

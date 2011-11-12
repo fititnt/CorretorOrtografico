@@ -10,6 +10,9 @@
 #ifndef COCORE_H_INCLUDED
 #define COCORE_H_INCLUDED
 
+
+#define DICIONARIO_PATH C:\\Users\\fititnt\\github\\fititnt\\CorretorOrtografico\\source\\dicionarios\\en.dic
+
 void coUserCL();
 void coStart();
 void coGodbye();
@@ -34,7 +37,21 @@ void coUserCL()
  */
 void coStart()
 {
+
+    char *content;
+    int i, linhas;
+
+    linhas = getFileToArray( "DICIONARIO_PATH", &content);
+
+    for( i = 0; i < linhas;  ++i)
+    {
+        printf("%s \n", (content + i) );
+    }
+
+    printf("%i \n", linhas);
+
     printf("Inicio do Corretor Ortografico\n");
+
 }
 
 /**

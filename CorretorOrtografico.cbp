@@ -31,9 +31,13 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="main.c">
+		<Unit filename="source\cocore.h" />
+		<Unit filename="source\debug.h" />
+		<Unit filename="source\filesys.h" />
+		<Unit filename="source\main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="source\userio.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
