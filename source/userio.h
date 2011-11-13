@@ -14,7 +14,7 @@
  *
  * @return Value of pressed key, as a char
  */
-char getKey()
+char uioGetKey()
 {
     char key;
     key = getchar();

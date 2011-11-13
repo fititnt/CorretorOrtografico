@@ -19,7 +19,7 @@
  *
  * @return 1 for success, 0 for fail
  */
-int fileSave()
+int fsFileSave()
 {
     //
     return 1;
@@ -34,7 +34,7 @@ int fileSave()
  * @param[in,out] char** content
  * @return int
  */
-int getFileToArray( char path[], char *content[] )
+int fsFileToArray( char path[], char *content[] )
 {
     int i = 0, size = 0;
     char line [ 256 ];
@@ -95,7 +95,7 @@ int getFileToArray( char path[], char *content[] )
 * @param[out] content Content of the file opened
 * @return leigth of content, or -2 if cannot open file or -1 if cannot read it
 */
-int getFileToString( char path[], char **content )
+int fsFileToString( char path[], char **content )
 {
     int size = 0;
     FILE *fp = fopen(path, "rb");
@@ -125,7 +125,7 @@ int getFileToString( char path[], char **content )
 * @param[in] path Path to file to save
 * @return 1 for success, 0 for fail
 */
-int fileRemove( char path[] )
+int fsRemove( char path[] )
 {
     if ( remove(path) == 0 ){
         return 0;

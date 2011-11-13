@@ -23,11 +23,11 @@
 int main()
 {
     clock_t start;
-    start = tdbProfileStart();
+    start = dbProfileStart();
 
     /// Print file contents
     //char * content;
-    //getFileToString("C:\\Users\\fititnt\\github\\fititnt\\CorretorOrtografico\\source\\dicionarios\\en.dic", &content);
+    //fsFileToString("C:\\Users\\fititnt\\github\\fititnt\\CorretorOrtografico\\source\\dicionarios\\en.dic", &content);
     //guiPringString(content);
 
     ///
@@ -35,10 +35,10 @@ int main()
     //content = malloc(300000*sizeof(char));
     char* content[65000];
     int i = -3;
-    i = getFileToArray("C:\\Users\\fititnt\\github\\fititnt\\CorretorOrtografico\\source\\testes\\en\\texto1.txt", content);
+    i = fsFileToArray("C:\\Users\\fititnt\\github\\fititnt\\CorretorOrtografico\\source\\testes\\en\\texto1.txt", content);
     //guiPringString(&content);
     //printf("\n getFileToArray result: >%i< \n", i);
 
-    tdbProfileEnd(start);
+    dbProfileEnd(start);
     return 0;
 }

@@ -26,7 +26,7 @@
  * @param[in] char[] Local do arquivo
  * @return int 0 para nao, 1 para sim
  */
-int debugFileOpen( char path[] )
+int dbFileOpen( char path[] )
 {
     FILE *file = fopen ( path, "r" );
     if ( file != NULL)
@@ -43,7 +43,7 @@ int debugFileOpen( char path[] )
  *
  *
  */
-void debugFilePrint( char path[] )
+void dbFilePrint( char path[] )
 {
     char line[128];
 
@@ -67,7 +67,7 @@ void debugFilePrint( char path[] )
  *
  * @return clock_t
  */
-clock_t tdbProfileStart()
+clock_t dbProfileStart()
 {
     return clock();
 }
@@ -86,7 +86,7 @@ clock_t tdbProfileStart()
  * @param[in] clock_t start Start time
  * @return clock_t total_time Total time since the start time
  */
-clock_t tdbProfileEnd( clock_t start )
+clock_t dbProfileEnd( clock_t start )
 {
     clock_t end , total_time;
     end = clock() - start;
