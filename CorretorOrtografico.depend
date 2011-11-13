@@ -1,11 +1,12 @@
 # depslib dependency file v1.0
-1321141324 source:c:\users\fititnt\github\fititnt\corretorortografico\source\main.c
+1321151206 source:c:\users\fititnt\github\fititnt\corretorortografico\source\main.c
 	<stdio.h>
 	<stdlib.h>
 	"filesys.h"
 	"userio.h"
 	"cocore.h"
 	"debug.h"
+	"gui.h"
 	<time.h>
 
 1319452799 c:\users\fititnt\github\fititnt\corretorortografico\source\userio.h
@@ -14,13 +15,15 @@
 
 1319434862 c:\users\fititnt\github\fititnt\corretorortografico\source\filesave.h
 
-1320382822 c:\users\fititnt\github\fititnt\corretorortografico\source\cocore.h
+1321151233 c:\users\fititnt\github\fititnt\corretorortografico\source\cocore.h
 
-1320382589 c:\users\fititnt\github\fititnt\corretorortografico\source\filesys.h
+1321151901 c:\users\fititnt\github\fititnt\corretorortografico\source\filesys.h
 	<stdio.h>
 	<string.h>
 
-1321141357 c:\users\fititnt\github\fititnt\corretorortografico\source\debug.h
+1321143378 c:\users\fititnt\github\fititnt\corretorortografico\source\debug.h
 	<stdio.h>
 	<time.h>
+
+1321144410 c:\users\fititnt\github\fititnt\corretorortografico\source\gui.h
 

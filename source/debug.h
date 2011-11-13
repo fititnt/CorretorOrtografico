@@ -1,8 +1,15 @@
+/**
+ * @file debug.h
+ * @details Corretor Ortografico - Debug
+ * @version 0.1alpha
+ * @author Emerson Rocha Luiz
+ * @copyright MIT. See license.txt
+ */
+
 #ifndef DEBUG_H_INCLUDED
 #define DEBUG_H_INCLUDED
 
 #include <stdio.h>
-
 #include <time.h>
 
 /**

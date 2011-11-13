@@ -12,6 +12,7 @@
 #include "userio.h"
 #include "cocore.h"
 #include "debug.h"
+#include "gui.h"
 
 #include <time.h>
 
@@ -22,12 +23,22 @@
 int main()
 {
     clock_t start;
-
     start = tdbProfileStart();
 
-    debugFilePrint("C:\\Users\\fititnt\\github\\fititnt\\CorretorOrtografico\\source\\dicionarios\\en.dic");
+    /// Print file contents
+    //char * content;
+    //getFileToString("C:\\Users\\fititnt\\github\\fititnt\\CorretorOrtografico\\source\\dicionarios\\en.dic", &content);
+    //guiPringString(content);
+
+    ///
+    //char* content;
+    //content = malloc(300000*sizeof(char));
+    char* content[65000];
+    int i = -3;
+    i = getFileToArray("C:\\Users\\fititnt\\github\\fititnt\\CorretorOrtografico\\source\\testes\\en\\texto1.txt", content);
+    //guiPringString(&content);
+    //printf("\n getFileToArray result: >%i< \n", i);
 
     tdbProfileEnd(start);
-
     return 0;
 }

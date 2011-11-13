@@ -18,6 +18,8 @@ void coStart();
 void coGodbye();
 void coHelp();
 void coCredits();
+int coDicionarioPalavraTolerada(char * termo);
+int coDicionarioPalavraPertence(char * dicionario, char * termo);
 
 /**
  * Corretor Ortografico User Command Line
@@ -37,7 +39,7 @@ void coUserCL()
  */
 void coStart()
 {
-
+    /*
     char *content;
     int i, linhas;
 
@@ -51,7 +53,7 @@ void coStart()
     printf("%i \n", linhas);
 
     printf("Inicio do Corretor Ortografico\n");
-
+    */
 }
 
 /**
@@ -83,5 +85,33 @@ void coCredits()
 {
     //
 }
+/**
+ * Retorna se uma palavra pertente a um dicionario do tipo Simples, isto e', um
+ * dicionario que contem apenas um array de palavras
+ *
+ * @param[in] char** dicionario Dicionario base para a pesquisa
+ * @param[in] char* termo Termo a ser pesquisado
+ * @return int 1 se pertence (exato), 0 se termo tolerado e -1 se termo estranho
+ */
+int coDicionarioSimplesPalavraPertence( char** dicionario, char * termo )
+{
+    int tolerancia;
+    tolerancia = coDicionarioPalavraTolerada(termo);
+    //@todo ...
+    return tolerancia;
+}
+/**
+ * Retorna se uma palavra pertente a um dicionario
+ *
+ * @param[in] char* termo Termo a ser pesquisado
+ * @return int 2 se palavra livremente aceita, 1 se tolerada e 0 se intolerada
+ */
+int coDicionarioPalavraTolerada( char* termo )
+{
+    //@todo ...
+    return 1;
+}
+
+
 
 #endif // COCORE_H_INCLUDED
