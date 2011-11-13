@@ -13,20 +13,21 @@
 #include "cocore.h"
 #include "debug.h"
 
- /**
- * Main function
- *
- */
+#include <time.h>
+
+/**
+* Main function
+*
+*/
 int main()
 {
-    //coUserCL();
+    clock_t start;
 
-    int resultado;
-    resultado = debugFileOpen("C:\\Users\\fititnt\\github\\fititnt\\CorretorOrtografico\\source\\dicionarios\\en.dic");
-    if ( resultado == 1 ){
-        printf("O arquivo pode ser aberto");
-    } else {
-        printf("O arquivo nao pode ser aberto");
-    }
+    start = tdbProfileStart();
+
+    debugFilePrint("C:\\Users\\fititnt\\github\\fititnt\\CorretorOrtografico\\source\\dicionarios\\en.dic");
+
+    tdbProfileEnd(start);
+
     return 0;
 }
