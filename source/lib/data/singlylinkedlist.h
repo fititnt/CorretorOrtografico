@@ -1,6 +1,6 @@
 /**
  * @file singlylinkedlist.h
- * @details SinglyLinkedList
+ * @details Singly Linked List
  * @see http://en.wikipedia.org/wiki/Linked_list
  * @version 0.1beta
  * @author Emerson Rocha Luiz
@@ -11,39 +11,39 @@
 #define SINGLYLINKEDLIST_H_INCLUDED
 
 //Struct of data do hold information
-struct Data
+struct DataSLL
 {
     char item[100];
 } ;
-typedef struct Data TypeData; //Define one Type of this element
+typedef struct DataSLL TypeSLLData; //Define one Type of this element
 
 //Struct of node used on list
-struct Node
+struct NodeSLL
 {
-    TypeData data;
-    struct Node* next;
+    TypeSLLData data;
+    struct NodeSLL* next;
 };
-typedef struct Node TypeNode;  //Define one Type of this element
+typedef struct NodeSLL TypeSLLNode;  //Define one Type of this element
 
-//Initialize Node (set to NULL)
-struct Node* initialize(void);
+//initializeSLL Node (set to NULL)
+struct NodeSLL* initializeSLL(void);
 //Insert one new value to the list
-struct Node* insertNode (struct Node* list, TypeData data);
+struct NodeSLL* insertSLLNode (struct NodeSLL* list, TypeSLLData data);
 //Print all elements of one list
-void printList(struct Node* list);
+void printSLLList(struct NodeSLL* list);
 //Remove entire list, i.e., free memory usage of all elements
-void removeList(struct Node* list);
+void removeSLLList(struct NodeSLL* list);
 //Remove one node with one respective data value and return resultant list
-struct Node* removeNode(struct Node* list, TypeData data);
+struct NodeSLL* removeSLLNode(struct NodeSLL* list, TypeSLLData data);
 //Search for one data in one list
-struct Node* searchNode( struct Node* list, TypeData data);
+struct NodeSLL* searchSLLNode( struct NodeSLL* list, TypeSLLData data);
 
 /**
- * Initialize Node (set to NULL)
+ * initializeSLL Node (set to NULL)
  *
  * @return NULL
  */
-struct Node* initialize(void)
+struct NodeSLL* initializeSLL(void)
 {
     return NULL;
 }
@@ -51,16 +51,16 @@ struct Node* initialize(void)
 /**
  * Insert one new value to the list
  *
- * @param[in] TypeNode list: List to search
- * @param[in] TypeData data: Data for insert
- * @return TypeNode list: Resultant list
+ * @param[in] TypeSLLNode list: List to search
+ * @param[in] TypeSLLData data: Data for insert
+ * @return TypeSLLNode list: Resultant list
  */
-struct Node* insertNode (struct Node* list, TypeData data)
+struct NodeSLL* insertSLLNode (struct NodeSLL* list, TypeSLLData data)
 {
-    struct Node* newItem;
-    struct Node* last = NULL;
-    struct Node* aux = list;
-    newItem = malloc(sizeof(TypeData));
+    struct NodeSLL* newItem;
+    struct NodeSLL* last = NULL;
+    struct NodeSLL* aux = list;
+    newItem = malloc(sizeof(TypeSLLData));
     newItem->data = data;
 
     while (( aux != NULL ) && ( strcmp(aux->data.item, data.item ) < 0 ))
@@ -86,12 +86,12 @@ struct Node* insertNode (struct Node* list, TypeData data)
 /**
  * Print all elements of one list
  *
- * @param[in] TypeNode list: List to print
+ * @param[in] TypeSLLNode list: List to print
  * @return void
  */
-void printList(struct Node* list)
+void printSLLList(struct NodeSLL* list)
 {
-    struct Node* aux;
+    struct NodeSLL* aux;
 
     if (list == NULL)
     {
@@ -110,12 +110,12 @@ void printList(struct Node* list)
 /**
  * Remove entire list, i.e., free memory usage of all elements
  *
- * @param[in] TypeNode list: List to search
+ * @param[in] TypeSLLNode list: List to search
  * @return void
  */
-void removeList(struct Node* list)
+void removeSLLList(struct NodeSLL* list)
 {
-    struct Node* aux;
+    struct NodeSLL* aux;
     while (list != NULL)
     {
         aux = list;
@@ -128,14 +128,14 @@ void removeList(struct Node* list)
 /**
  * Remove one node with one respective data value and return resultant list
  *
- * @param[in] TypeNode list: List to search
- * @param[in] TypeData data: Data for search to remove
- * @return TypeNode list: Resultant list
+ * @param[in] TypeSLLNode list: List to search
+ * @param[in] TypeSLLData data: Data for search to remove
+ * @return TypeSLLNode list: Resultant list
  */
-struct Node* removeNode(struct Node* list, TypeData data)
+struct NodeSLL* removeSLLNode(struct NodeSLL* list, TypeSLLData data)
 {
-    struct Node* last = NULL;
-    struct Node* aux = list;
+    struct NodeSLL* last = NULL;
+    struct NodeSLL* aux = list;
 
     while (aux !=NULL && (strcmp(aux->data.item, data.item)))
     {
@@ -166,18 +166,18 @@ struct Node* removeNode(struct Node* list, TypeData data)
  *
  * @example
  *      strcpy( data.item, "item to search");
- *      if ( searchNode( list, data ) != NULL ){
+ *      if ( searchSLLNode( list, data ) != NULL ){
  *          printf("\n%s found \n", data.item);
  *      }
  *
- * @param[in] TypeNode list: List to search
- * @param[in] TypeData data: Data for search
- * @return TypeNode aux: Node if find, NULL if not find element
+ * @param[in] TypeSLLNode list: List to search
+ * @param[in] TypeSLLData data: Data for search
+ * @return TypeSLLNode aux: Node if find, NULL if not find element
  */
-struct Node* searchNode( struct Node* list, TypeData data)
+struct NodeSLL* searchSLLNode( struct NodeSLL* list, TypeSLLData data)
 {
-    struct Node* last = NULL;
-    struct Node* aux = list;
+    struct NodeSLL* last = NULL;
+    struct NodeSLL* aux = list;
 
     while (aux !=NULL && (strcmp(aux->data.item, data.item)))
     {

@@ -10,7 +10,7 @@
 #ifndef COCORE_H_INCLUDED
 #define COCORE_H_INCLUDED
 
-#include "source/lib/data/singlylinkedlist.h"
+#include "lib/data/singlylinkedlist.h"
 
 
 #define DICIONARIO_PATH C:\\Users\\fititnt\\github\\fititnt\\CorretorOrtografico\\source\\dicionarios\\en.dic

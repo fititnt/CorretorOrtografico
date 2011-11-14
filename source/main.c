@@ -8,12 +8,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "filesys.h"
+#include "lib/fs/filesys.h"
 #include "userio.h"
 #include "cocore.h"
-#include "debug.h"
-#include "gui.h"
-#include "source/lib/data/singlylinkedlist.h"
+#include "lib/db/debug.h"
+#include "lib/gui/gui.h"
+#include "lib/data/singlylinkedlist.h"
 
 #include <time.h>
 
