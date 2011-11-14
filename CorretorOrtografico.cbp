@@ -32,8 +32,16 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="source\cocore.h" />
-		<Unit filename="source\debug.h" />
-		<Unit filename="source\filesys.h" />
+		<Unit filename="source\cotests.h" />
+		<Unit filename="source\lib\data\avltree.h" />
+		<Unit filename="source\lib\data\binarysearchtree.h" />
+		<Unit filename="source\lib\data\binarytree.h" />
+		<Unit filename="source\lib\data\oabtree.h" />
+		<Unit filename="source\lib\data\redblacktree.h" />
+		<Unit filename="source\lib\data\splaytree.h" />
+		<Unit filename="source\lib\db\debug.h" />
+		<Unit filename="source\lib\fs\filesys.h" />
+		<Unit filename="source\lib\gui\gui.h" />
 		<Unit filename="source\main.c">
 			<Option compilerVar="CC" />
 		</Unit>

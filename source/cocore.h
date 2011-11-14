@@ -10,6 +10,8 @@
 #ifndef COCORE_H_INCLUDED
 #define COCORE_H_INCLUDED
 
+#include "source/lib/data/singlylinkedlist.h"
+
 
 #define DICIONARIO_PATH C:\\Users\\fititnt\\github\\fititnt\\CorretorOrtografico\\source\\dicionarios\\en.dic
 
@@ -112,6 +114,11 @@ int coDicionarioPalavraTolerada( char* termo )
     return 1;
 }
 
+
+int coLoadToSinglyLinkedList( char * path, struct Node* node)
+{
+
+}
 
 
 #endif // COCORE_H_INCLUDED

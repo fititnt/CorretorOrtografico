@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1321151206 source:c:\users\fititnt\github\fititnt\corretorortografico\source\main.c
+1321152515 source:c:\users\fititnt\github\fititnt\corretorortografico\source\main.c
 	<stdio.h>
 	<stdlib.h>
 	"filesys.h"
@@ -9,7 +9,7 @@
 	"gui.h"
 	<time.h>
 
-1319452799 c:\users\fititnt\github\fititnt\corretorortografico\source\userio.h
+1321152438 c:\users\fititnt\github\fititnt\corretorortografico\source\userio.h
 
 1319434866 c:\users\fititnt\github\fititnt\corretorortografico\source\fileload.h
 
