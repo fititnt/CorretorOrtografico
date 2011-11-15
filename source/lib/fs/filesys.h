@@ -36,7 +36,8 @@ int fsFileSave()
  */
 int fsFileToArray( char path[], char *content[] )
 {
-    int i = 0, size = 0;
+    int i = 0;
+    //int size = 0;
     char line [ 256 ];
 
     FILE *fp = fopen ( path, "r" );
@@ -133,6 +134,79 @@ int fsRemove( char path[] )
         return 1;
     }
 }
+
+
+/**
+ * Retorna se um arquivo pode ser aberto para leitura
+ * @example
+ *    int resultado;
+ *    resultado = debugFileOpen("file.txt");
+ *    if ( resultado == 1 ){
+ *        printf("O arquivo pode ser aberto");
+ *    } else {
+ *        printf("O arquivo nao pode ser aberto");
+ *    }
+ *
+ * @param[in] char[] Local do arquivo
+ * @return int 0 para nao, 1 para sim
+ */
+int fsFileOpen( char path[] )
+{
+    FILE *file = fopen ( path, "r" );
+    if ( file != NULL)
+    {
+        return 1; //Arquivo pode ser aberto
+    }
+    else
+    {
+        return 0; //Arquvo nao pode ser aberto
+    }
+}
+/**
+ * Return String from command line input
+ * Replacement of starndart gets() and its problems with buffer overflow
+ * @todo make some check to verify alocate leigth of str and set to fgets
+ * @example
+ * @code
+ *    leigth = fsGetStr(str);
+ *    printf("%s (%d)", str, leigth);
+ *    if ( strcmp( str,"teste") == 0 ) {
+ *        printf("%s", "\n Equals\n");
+ *    }
+ *   else {
+ *        printf("%s", "\n Diferent\n");
+ *    }
+ * @endcode
+ * @param[in,out] str Pointer to string to return the input
+ * @return leigth leigth of string
+ */
+int fsGetStr( char *str )
+{
+    fgets (str, 255, stdin);
+    int FinalLeigth = strlen(str) -1;
+    str[FinalLeigth] = '\0';//Just set to \0 will mark as array end
+    return FinalLeigth;
+    //gets(str);
+    //printf(str);
+    /*
+    //
+    int i;
+    char input[255];
+    fgets (input, 255, stdin);
+    int leigth = strlen(input);
+    ///@todo Check best way (performance, security) way to remove last \0 char
+    //*(str + leigth) = NULL;
+    input[leigth-1] = '\0';
+    strcpy(str , input);
+    //str = str[leigth-1];//
+    //memmove (str+leigth, str+(leigth-1), (leigth-1));
+    //for( i = 0; i < (leigth - 1);  )
+    //memmove( str+leigth, input, leigth -1 );
+    leigth = strlen(str);
+    return leigth;
+    */
+}
+
 
 
 #endif // FILESAVE_H_INCLUDED

@@ -39,6 +39,18 @@ void guiPringString( char * str)
     printf("%s", str);
 }
 
+ /**
+ * Get pressed key
+ *
+ * @return Value of pressed key, as a char
+ */
+char uioGetKey()
+{
+    char key;
+    key = getchar();
+    return key;
+}
+
 
 
 #endif // GUI_H_INCLUDED

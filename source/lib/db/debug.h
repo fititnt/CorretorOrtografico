@@ -95,4 +95,33 @@ clock_t dbProfileEnd( clock_t start )
     return total_time;
 }
 
+/**
+ * Dump some useful information about one array
+ * - String Representation
+ * - Leigth
+ * - ASCII format
+ * - Hexadecimal format
+ * - Deximal
+ * - Octa
+ * @example
+ * @code
+ *      fsArrayDump("My String");
+ * @endcode
+ *
+ * @param[in] array Array to dump
+ * @return void
+ */
+void fsArrayDump(char *array)
+{
+    int i, itens;
+    itens = sizeof(array)/sizeof(array[0]);
+    printf("String: %s \n", array);
+    printf("Leigth: %i \n", itens);
+    printf(" ASCII |   HEX    |   DEC     |   OCT\n", array);
+    for (i=0; i < itens ; i++){
+        printf("   %c   |   %3.x    | %8.u  | %8.o\n", array[i], array[i]);
+    }
+}
+
+
 #endif // DEBUG_H_INCLUDED
