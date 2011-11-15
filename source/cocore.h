@@ -15,108 +15,7 @@
 #include "cohelper.h"
 
 
-#define DICIONARIO_PATH C:\\Users\\fititnt\\github\\fititnt\\CorretorOrtografico\\source\\dicionarios\\en.dic
 
-/**
- * Struct para conter bemchmark de uma acao
- * @todo implementar uma lista duplamente encadeada
- *
- * @param id Identificacao unica de uma acao
- * @param descricao Descricao da acao realizada
- * @param InicioDeAcao Tempo inicial de excecussao de uma acao
- * @param FinalDeAcao Tempo final de excecucao de uma acao
- * @param TempoDeExcecucao Tempo computado de escecucao de uma acao, em segundos
- * @param proximo Ponteiro para o proximo benchmark
- *
- */
-struct Benchmarks
-{
-    int id;
-    char descricao[100];
-    time_t InicioDeAcao;
-    time_t FinalDeAcao;
-    float TempoDeExcecucao;
-    struct Benchmarks *proximo;
-};
-
-
-/**
- *
- * @param idioma[20] Nome do idioma
- * @param quantia Numero de definicoes (palavras) que contem
- * @param definicoes Palavras contidas no dicionario
- * @param cacheDefinidas Cache com termos frequentes e definidos no dicionario
- * @param cacheIndefinidas Cache com termos frequentes, porem nao definidos
- * @param proximo Ponteiro para o proximo item
- *
- */
-struct Dicionarios
-{
-    char idioma[20];
-    double quantia;
-    //TipoDeDicionario definicoes
-    //TipoDeCache cacheDefinidas
-    //TipoDeCache cacheIndefinidas
-    struct Dicionarios *proximo;
-};
-
-
-/**
- *
- *
- *
- *
- */
-struct Palavras
-{
-    //
-};
-
-/**
- * Estrutura que define a reuniao de informacoes sobre analise ortografica de
- * um texto especifico
- *
- * @todo Refletir se nao e` melhor fundir com o struct Textos
- *
- *
- *
- *
- */
-struct AnaliseOrtografica
-{
-    //
-};
-/**
- * Reune os textos usados e testados
- *
- * @note Poderia ter sido adicionado em vez de diretamente o ponteiro para o
- *       dicionario, simplesmente o nome do dicionario, mas e` mais eficiente
- *       definir o quanto antes direto o ponteiro em vez de realizar buscas
- *       adicionais
- *
- * @param palavras Ponteiro para lista de palavras do texto
- * @param dicionario Ponteiro para um dicionario especifico
- *
- */
-struct Textos
-{
-    struct Palavras *palavras;
-    struct Dicionarios *dicionario;
-    struct AnaliseOrtografica *analise;
-
-};
-/**
- * Struct para conter informacoes pertinentes a respeito do CorretorOrtografico
- * @
- * @param ListaDebenchmark Ponteiro para uma lista de benchmarks
- *
- */
-struct COInfo
-{
-    struct Benchmarks benchmarks;
-    struct Dicionarios dicionarios;
-
-}COInfoType;
 
 //
 void coAjuda();
@@ -125,7 +24,7 @@ void coCore();
 //
 void coCreditos();
 //
-void coDicionarioCarrega();
+void coDicionarioCarrega( COMemType *Memoria );
 //
 int coDicionarioPalavraTolerada( char* termo );
 //
@@ -169,14 +68,13 @@ void coCreditos()
     //
 }
 
-/**
- *
- *
- *
- */
-void coDicionarioCarrega( struct COInfo *Memoria )
+
+void coDicionarioCarrega( COMemType *Memoria )
 {
     char path[255];
+    char line[256];
+    char idioma[50];
+
     printf("\n Insira caminho para o arquivo");
     printf("\n arquivo> ");
     fsGetStr( path );
@@ -185,14 +83,27 @@ void coDicionarioCarrega( struct COInfo *Memoria )
         printf("\n arquivo> ");
         fsGetStr( path );
     }
-    char line[128];
+    printf("\n Nome do idioma:");
+    printf("\n idioma> ");
+    fsGetStr( idioma );
 
-    FILE *file = fopen ( path , "r" );//C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/testes/br/texto5.txt
+    if ( Memoria->dicionarios != NULL ){
+
+    }
+
+    cohCarregaDicionario( Memoria, path);
+
+    /*
+    FILE *file = fopen ( path , "r" );//C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/dicionarios/en.dic
     if ( file != NULL)
     {
         while(!feof(file))
         {
-            if(fgets(line, 128, file)) printf("%s", line);
+            if( fgets(line, 256, file) ){
+                line[strlen(line) -1] = '\0';//Remove linebreak
+                printf("%s", line);
+
+            }
         }
         return; //Arquivo pode ser aberto
     }
@@ -200,9 +111,9 @@ void coDicionarioCarrega( struct COInfo *Memoria )
     {
         printf("File cannot be opened");
     }
+    */
     //cohCarregaDicionario( *Memoria, path );
 }
-
 
 
 /**

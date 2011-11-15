@@ -21,7 +21,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "lib/fs/filesys.h"
-#include "cohelper.h"
 #include "cocore.h"
 #include "lib/db/debug.h"
 #include "lib/gui/gui.h"
@@ -36,7 +35,8 @@
 int main()
 {
     int acao, subacao;
-    struct COInfo *Memoria = malloc(sizeof(struct COInfo));
+    COMemType *Memoria = malloc(sizeof(COMemType));
+    Memoria = cohInicializaMemoria(Memoria);
 
     clock_t start;
     start = dbProfileStart();

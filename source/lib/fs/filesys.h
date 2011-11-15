@@ -186,25 +186,6 @@ int fsGetStr( char *str )
     int FinalLeigth = strlen(str) -1;
     str[FinalLeigth] = '\0';//Just set to \0 will mark as array end
     return FinalLeigth;
-    //gets(str);
-    //printf(str);
-    /*
-    //
-    int i;
-    char input[255];
-    fgets (input, 255, stdin);
-    int leigth = strlen(input);
-    ///@todo Check best way (performance, security) way to remove last \0 char
-    //*(str + leigth) = NULL;
-    input[leigth-1] = '\0';
-    strcpy(str , input);
-    //str = str[leigth-1];//
-    //memmove (str+leigth, str+(leigth-1), (leigth-1));
-    //for( i = 0; i < (leigth - 1);  )
-    //memmove( str+leigth, input, leigth -1 );
-    leigth = strlen(str);
-    return leigth;
-    */
 }
 
 

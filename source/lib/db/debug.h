@@ -117,9 +117,9 @@ void fsArrayDump(char *array)
     itens = sizeof(array)/sizeof(array[0]);
     printf("String: %s \n", array);
     printf("Leigth: %i \n", itens);
-    printf(" ASCII |   HEX    |   DEC     |   OCT\n", array);
+    printf(" ASCII |   HEX    |   DEC     |   OCT\n");
     for (i=0; i < itens ; i++){
-        printf("   %c   |   %3.x    | %8.u  | %8.o\n", array[i], array[i]);
+        printf("   %c   |   %3.x    | %8.u  | %8.o \n", array[i], array[i], array[i], array[i]);
     }
 }
 
