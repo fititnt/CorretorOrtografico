@@ -3,6 +3,8 @@
 
 #include "lib/data/singlylinkedlist.h"
 #include "cocore.h"
+#include <time.h>
+#include "lib/db/debug.h"
 
 /**
  *
@@ -182,6 +184,8 @@ int cohCarregaDicionario( COMemType *Memoria, char *path, char *idioma )
 {
     char line[256];
     double i = 0;
+    clock_t start;
+
     TypeSLLData definicao;
 
     if (Memoria->dicionarios == NULL)
@@ -195,6 +199,8 @@ int cohCarregaDicionario( COMemType *Memoria, char *path, char *idioma )
     FILE *file = fopen ( path , "r" );//C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/dicionarios/en.dic
     if ( file != NULL)
     {
+        start = dbProfileStart();
+
         while(!feof(file))
         {
             if( fgets(line, 256, file) )
@@ -207,7 +213,11 @@ int cohCarregaDicionario( COMemType *Memoria, char *path, char *idioma )
             ++i;
         }
         Memoria->dicionarios->quantia = (double)i;
-        printf("\n %g - %g\n", i, Memoria->dicionarios->quantia);
+        //printf("\n %g - %g\n", i, Memoria->dicionarios->quantia);
+
+        printf("\nTempo de carregamento do dicionario:\n   ");
+        dbProfileEnd( start );
+
         return i; //Retorna a quantidade de linhas adicionadas
     }
     else

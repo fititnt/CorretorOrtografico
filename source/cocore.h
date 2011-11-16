@@ -12,6 +12,7 @@
 
 #include <ctype.h> //isspace(c)
 #include "lib/data/singlylinkedlist.h"
+#include "lib/data/singlylinkedlist2.h"
 #include "cohelper.h"
 
 
@@ -271,14 +272,17 @@ void coSaida()
  */
 int coTextoAnalisa( COMemType *Memoria, char *content)
 {
-    printf("\ncoTextoAnalisa\n");
-
+    clock_t start;
     TypeSLLNode *Node = initializeSLL();
     TypeSLLData data;
     int i, letras = 0, palavras = 0, quebraDePalavra = 0;
     char buffer[100];
     int tamanho = strlen(content);
+    int numerodeerros = 0;
+    printf("\n\n\n\n Insira o numero K:\n");
+    numerodeerros = coOpcaoQuestiona(0, 100);
 
+    start = dbProfileStart();
     for(i=0; i<=tamanho; ++i)
     {
         if( (isspace(content[i]) && !content[i] != '\'') || i==tamanho)// '  ',\f ,\n ,\r, \t, \v
@@ -293,7 +297,7 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
             ++palavras;
             letras = 0;
             quebraDePalavra = 1;
-            printf("Palavra %i (%i): %s, >%s (%i)< \n",palavras, strlen(buffer), buffer, data.item, strlen(data.item) );
+            //printf("Palavra %i (%i): %s, >%s (%i)< \n",palavras, strlen(buffer), buffer, data.item, strlen(data.item) );
         }
         if(isalnum(content[i]) || content[i] == '\'')//Se for alfanumerico
         {
@@ -301,9 +305,8 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
             ++letras;
         }
     }
-    printSLLList(Node);
-
-    printf("quantidade %i\n\n", palavras);
+    //printSLLList(Node);
+    //printf("quantidade %i\n\n", palavras);
 
 
     //Reorganiza lista
@@ -316,133 +319,47 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
     strcpy( proximo.item, Node->data.item);
     //Procurar o proximo
 
-    while (j < palavras || Node != NULL){
-        while( searchSLLNode( Node, procurado )!= NULL ){
-            Node = removeSLLNode( Node, procurado );//Remove encontrado
-            ++k;
-            ++l;
-            ++j;
-            //printf("i %i, ", ++j);
-        }
+    struct NodeSLL2 *Palavras = initializeSLL2();;
+    TypeSLL2Data Termo;
 
-        printf("\n %s :(%i) vezes\n", procurado.item, l);
+    start = dbProfileStart();
+    printf("\n");
+    printf("|-------------------------------------------------------|\n");
+    printf("  NUMERO (K)  |  FREQUENCIA  |   ERRO                    \n");
+    while (j < palavras || Node != NULL)
+    {
+        while( searchSLLNode( Node, procurado )!= NULL )
+        {
+            Node = removeSLLNode( Node, procurado );//Remove encontrado
+            ++k;  ++l;  ++j;
+        }
+        strcpy(Termo.item, procurado.item);
+        Termo.quantidade = l;
+
+        TypeSLLData termopesquisado;
+        strcpy( termopesquisado.item ,procurado.item);
+
+        if (searchSLLNode(Memoria->dicionarios->definicoes, termopesquisado ) != NULL)
+        {
+            if ( procurado.item > numerodeerros){
+                printf("    %3.i  | %3.i     |  %s \n", Termo.quantidade, Termo.quantidade, procurado.item );
+            }
+        }
+        //printSLLList(Memoria->dicionarios->definicoes);
+
+        //Palavras = insertSLL2Node(Palavras, Termo);
+        //printf("\n %s :(%i) vezes\n", Termo.item , Termo.quantidade);
         l=0;
-        if (Node != NULL){
+        if (Node != NULL)
+        {
             strcpy( procurado.item, Node->data.item);
         }
-        printf(" k %i, ", ++k);
-        getch();
     }
-
-
-
-    // i = numero de itens
-
-    /*
-    TypeSLLData *removerNo;
-    strcpy( removerNo->item , "your");
-    Node = removeSLLNode(Node, removerNo);
-    printSLLList(Node);
-    */
-    //struct NodeSLL* list = initializeSLL();
-
-
-    /*
-    struct NodeSLL* noAuxiliar = initializeSLL();//Criado no auxiliar
-    struct DataSLL procurado, proximo;
-    char aliasprocurado[100];
-    strcpy( procurado.item, Node->data.item);//Primeiro procurado
-    strcpy( aliasprocurado, Node->data.item);
-    strcpy( proximo.item, Node->data.item);
-    //Procurar o proximo
-
-    //struct NodeSLL* last = NULL;
-    struct NodeSLL* aux = Node;
-    int encontrados = 0, ultimavolta = 0, removidos = 0;
-
-    while(Node != NULL || removidos < i)
-    {
-        strcpy( aliasprocurado, procurado.item);
-        printf("\nPonto 1 inicio , Node != NULL");
-        noAuxiliar = Node;
-        while(noAuxiliar != NULL)
-        {
-            printf("\nPonto 2, noAuxiliar != NULL ");
-            noAuxiliar = searchSLLNode( noAuxiliar, procurado );//procura
-            if (noAuxiliar != NULL)  //Aha! voce ta ai!
-            {
-                printf("\nPonto 3, searchSLLNode( noAuxiliar, procurado ) != NULL");
-                printf("Encontrado o %s\n", noAuxiliar->data.item);
-                noAuxiliar = removeSLLNode( noAuxiliar, procurado );//Remove encontrado
-                //Node = noAuxiliar;
-                ++removidos;
-                ++encontrados;
-            }
-        }
-        printf("\nPonto 4 meio");
-        while(Node != NULL /*&& aux->next != NULL && strcmp(aliasprocurado, proximo.item) == 0)
-        {
-            printf("\nPonto 5, troca troca strcmp(aliasprocurado, proximo.item) == 0)");
-            aux = aux->next;
-            if( strcmp(procurado.item, aux->data.item ) != 0 )
-            {
-                strcpy( proximo.item,  aux->data.item);
-            }
-        }
-        printf("\nPonto 6 quase final");
-        //printf("Encontrado %i '%s' (proximo %s) \n", encontrados, procurado.item , proximo.item);
-        if( Node != NULL && aux->next != NULL){
-            printf("\nPonto 7, fim, Node != NULL && aux->next != NULL");
-            strcpy( procurado.item, proximo.item);
-        }
-        encontrados = 0;
-        printf("Encontrado %i, total %i \n", encontrados, i);
-
-        Node = searchSLLNode( noAuxiliar, procurado );//procura
-        getch();
-    }
-    printf("FIM. Encontrado %i, total %i \n", encontrados, i);
-    */
-    /*
-    Node = removeSLLNode( Node, data2 );
-    Node = removeSLLNode( Node, data2 );
-    Node = removeSLLNode( Node, data2 );
-    Node = removeSLLNode( Node, data2 );
-    Node = removeSLLNode( Node, data2 );
-    Node = removeSLLNode( Node, data2 );
-    Node = removeSLLNode( Node, data2 );
-    Node = removeSLLNode( Node, data2 );
-    Node = removeSLLNode( Node, data2 );
-    Node = removeSLLNode( Node, data2 );
-    Node = removeSLLNode( Node, data2 );
-    Node = removeSLLNode( Node, data2 );
-    Node = removeSLLNode( Node, data2 );
-    Node = removeSLLNode( Node, data2 );
-    Node = removeSLLNode( Node, data2 );
-    printSLLList(Node);
-    */
-    /*
-    TypeSLLNode *aux = Node;
-    TypeSLLNode *sequinte = NULL;
-    char * procurado;
-    int encontratos = 1;
-
-
-    while(Node != NULL)
-    {
-        strcpy(procurado, Node->data.item);
-        while( Node != NULL )
-        {
-            if( strcmp(Node->data.item, procurado) == 0 ){
-                Node = removeSLLNode(Node);
-                ++encontratos;
-            } else if ( ){
-
-            }
-        }
-    }
-    */
-
+    printf("|-------------------------------------------------------|\n");
+    printf("\n");
+    printf("\nTempo de carregamento e analise do texto:\n   ");
+    dbProfileEnd( start );
+    //printSLL2List(Palavras);
 
     return 1;
 }
@@ -490,7 +407,6 @@ void coTextoOpcoes( COMemType *Memoria )
             //printf("\n\n\%s \n\n\n", aux->completo);
         }
     }
-
     coTextoAnalisa(Memoria, Memoria->textos->completo );
 
 }
