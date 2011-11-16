@@ -28,70 +28,16 @@
 
 #include <time.h>
 
-/**
-* Main function
-*
-*/
 int main()
 {
     int acao, subacao;
     COMemType *Memoria = malloc(sizeof(COMemType));
     Memoria = cohInicializaMemoria(Memoria);
-    //Memoria->dicionarios = NULL;
-    //Memoria->dicionarios = malloc(sizeof(DicionariosType));
-    //Memoria->dicionarios->definicoes = NULL;
-    //int tamanho;
-    //char *content;
-    //tamanho = fsFileToString("C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/dicionarios/en.dic", &content);
-    //printf("%i, %s", tamanho, content);
-
-    char path[255] = "C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/dicionarios/en.dic";
-    char filename[255]; char extension[255]; char name[255];
-    fsPathInfo( path, filename, name, extension);
-    /*
-    int i, j = 0, k = 0, l = 0, dot = 0;
-    for( i=strlen(path); i > 0; --i){
-        if( path[i]=='\0'){
-            continue;
-        }
-        if( path[i]=='.'){
-            dot = 1;
-        }
-        if(  (char)path[i]=='\\' || (char)path[i] == '/'){
-            break;
-        }
-        if (dot == 0){
-            extension[j] = path[i];
-            ++j;
-        } else {
-            if( path[i]!='.'){
-            name[k] = path[i];
-            ++k;
-            }
-        }
-        filename[l] = path[i];
-        ++l;
-    }
-    extension[j] = '\0';
-    name[k] = '\0';
-    filename[l] = '\0';
-    strrev(extension);
-    strrev(name);
-    strrev(filename);
-*/
-    printf("\nPath: %s \nFilename: %s \nName: %s \nExtension: %s \n",path, filename, name, extension);
-
-
-
-    clock_t start;
-    start = dbProfileStart();
 
     coInicio();
 
-
     do
     {
-
         coListarOpcoes( 0 );
         acao = coOpcaoQuestiona(0, 5);
 
@@ -128,34 +74,21 @@ int main()
             }
             break;                                      // Opcao geral 2: fim
         case 3:  //Alterar definicoes desde programa    // Opcao geral 3: inicio
+            coListarOpcoes( 3 );
             break;                                      // Opcao geral 3: fim
         case 4:                       //Debug           // Opcao geral 4: inicio
+            coListarOpcoes( 4 );
             coDebug(Memoria);
             break;                                      // Opcao geral 4: fim
         case 5:                       //Creditos        // Opcao geral 5: inicio
+            coListarOpcoes( 5 );
             coCreditos();
             break;                                      // Opcao geral 5: fim
         }
     }
     while ( acao > 0 );
 
-
-    /// Print file contents
-    //char * content;
-    //fsFileToString("C:\\Users\\fititnt\\github\\fititnt\\CorretorOrtografico\\source\\dicionarios\\en.dic", &content);
-    //guiPringString(content);
-
-    ///
-    //char* content;
-    //content = malloc(300000*sizeof(char));
-    //char* content[65000];
-    //int i = -3;
-    //i = fsFileToArray("C:\\Users\\fititnt\\github\\fititnt\\CorretorOrtografico\\source\\testes\\en\\texto1.txt", content);
-    //guiPringString(&content);
-    //printf("\n getFileToArray result: >%i< \n", i);
-
     coSaida();
 
-    dbProfileEnd(start);
-    return 0;
+    return 1;
 }

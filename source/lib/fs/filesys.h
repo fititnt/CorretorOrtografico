@@ -208,13 +208,13 @@ void fsPathInfo(char *path, char *filename, char *name, char *extension)
 {
     int i, j = 0, k = 0, l = 0, dot = 0;
     if (filename == NULL){
-        char filename[255];
+        //char filename[255];
     }
     if (extension == NULL){
-        char extension[255];
+        //char extension[255];
     }
     if (name == NULL){
-        char name[255];
+        //char name[255];
     }
     for( i=strlen(path); i > 0; --i){
         if( path[i]=='\0'){

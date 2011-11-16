@@ -53,13 +53,15 @@ int coQuestionaAcao();
 static int _coCarregaInformacoes( char *path , char *idioma, char *descricao)
 {
     int sucesso = 1;
-    char filename[255]; char extension[255];/* char name[255]*/;//Get path info
+    char filename[255];
+    char extension[255];/* char name[255]*/;//Get path info
 
     printf("\n Insira caminho para o arquivo");
     printf("\n arquivo> ");
     fflush(stdin); //Limpar buffer
     fsGetStr( path );
-    while( !fsFileOpen( path ) ){
+    while( !fsFileOpen( path ) )
+    {
         printf("\n O Arquivo nao foi encontrado, ou nao esta disponivel para leitura. Revise:");
         printf("\n arquivo> ");
         fsGetStr( path );
@@ -100,7 +102,10 @@ void coCore()
  */
 void coCreditos()
 {
-    //
+    printf("\nAutor: Emerson Rocha Luiz");
+    printf("\nContato: emerson@webdesign.eng.br");
+    printf("\nSite: http://fititnt.org");
+    printf("\nRepositorio: https://github.com/fititnt/CorretorOrtografico\n\n");
 }
 
 void coDicionarioCarrega( COMemType *Memoria )
@@ -111,7 +116,8 @@ void coDicionarioCarrega( COMemType *Memoria )
     printf("\n Insira caminho para o arquivo");
     printf("\n arquivo> ");
     fsGetStr( path );
-    while( !fsFileOpen( path ) ){ //@todo checar se arquivo existe e pode ser lido
+    while( !fsFileOpen( path ) )  //@todo checar se arquivo existe e pode ser lido
+    {
         printf("\n O Arquivo nao foi encontrado, ou nao esta disponivel para leitura. Revise:");
         printf("\n arquivo> ");
         fsGetStr( path );
@@ -122,7 +128,8 @@ void coDicionarioCarrega( COMemType *Memoria )
 
     //Se o dicionario e' NULL, quer dizer que foi recentemente inicializado,
     //logo, precisa-se alocar mais espaco em memoria para alguns itens
-    if ( Memoria->dicionarios == NULL ){
+    if ( Memoria->dicionarios == NULL )
+    {
         //Memoria->dicionarios = cohInicializaDicionarios(Memoria->dicionarios);
     }
 
@@ -150,11 +157,12 @@ void coDicionarioCarrega( COMemType *Memoria )
     //cohCarregaDicionario( *Memoria, path );
 }
 
-void coDebug(COMemType *Memoria){
-    printf("\n\n\n");
-    printf("\n         **DEBUG**         \n");
+void coDebug(COMemType *Memoria)
+{
+    printf("\n");
+    printf("\n|-------------------DEBUG------------------------|\n");
     printf("Memoria: %i \n", sizeof(Memoria));
-    printf("\n         **DEBUG**         \n");
+    printf("\n|------------------------------------------------|\n");
 }
 
 /**
@@ -225,7 +233,8 @@ int coOpcaoQuestiona( int min, int max )
 {
     int entrada;
     scanf("%i", &entrada);
-    while ( !(entrada >= min) || !(entrada <=max) ){
+    while ( !(entrada >= min) || !(entrada <=max) )
+    {
         printf("\nResposta nao conforme Informe um valor valido entre %i e %i\n\n  Novo valor>", min, max);
         scanf("%i", &entrada);
     }
@@ -238,45 +247,57 @@ int coOpcaoQuestiona( int min, int max )
  */
 void coListarOpcoes( int opcao)
 {
-        switch ( opcao ){
-            case 0:
-                //printf("\n     OPCOES GERAIS");
-                printf("\n 1 - Gerenciar dicionarios");
-                printf("\n 2 - Gerenciar textos");
-                printf("\n 3 - Alterar definicoes desde programa");
-                printf("\n 4 - Debug");
-                printf("\n 5 - Creditos");
-                printf("\n 0 - Encerra o programa");
-                printf("\n\n  Geral> ");
-                break; //Fim acao 0
-            case 1:
-                //printf("\n     OPCOES DE DICIONARIO");
-                printf("\n 1 - Adicionar dicionario");
-                printf("\n 2 - Editar dicionario existente");
-                printf("\n 3 - Remover dicionario");
-                printf("\n 0 - Volta ao menu anterior");
-                printf("\n\n  Dicionario> ");
-                break; //Fim acao 1
-            case 2:
-                //printf("\n     OPCOES DE TEXTO");
-                printf("\n 1 - Adicionar texto");
-                printf("\n 2 - (Re)Analizar texto");
-                printf("\n 3 - Editar texto");
-                printf("\n 4 - Remover texto");
-                printf("\n 0 - Volta ao menu anterior");
-                printf("\n\n  Texto> ");
-                break; //Fim acao 2
-            case 4:
-                //printf("\n     OPCOES DE TEXTO");
-                printf("\n\n  Debug> ");
-                break; //Fim acao 2
-            case 5:
-                //coCreditos();
-                break; //Fim acao 2
-            default:
-                printf("\nErro logico n1\n");
-                break; //Fim acao 3
-        }
+    switch ( opcao )
+    {
+    case 0:
+        printf("\n|---------------------GERAL----------------------|");
+        printf("\n| 1 - Gerenciar dicionarios                      |");
+        printf("\n| 2 - Gerenciar textos                           |");
+        printf("\n| 3 - Alterar definicoes desde programa          |");
+        printf("\n| 4 - Debug                                      |");
+        printf("\n| 5 - Creditos                                   |");
+        printf("\n| 0 - Encerra o programa                         |");
+        printf("\n|------------------------------------------------|");
+        printf("\n\n  GERAL> ");
+        break;
+    case 1:
+        printf("\n|------------------DICIONARIO--------------------|");
+        printf("\n| 1 - Adicionar dicionario                       |");
+        printf("\n| 2 - Editar dicionario existente                |");
+        printf("\n| 3 - Remover dicionario                         |");
+        printf("\n| 0 - Volta ao menu anterior                     |");
+        printf("\n|------------------------------------------------|");
+        printf("\n\n  DICIONARIO> ");
+        break;
+    case 2:
+        printf("\n|---------------------TEXTO----------------------|");
+        printf("\n| 1 - Adicionar texto                            |");
+        printf("\n| 2 - (Re)Analizar texto                         |");
+        printf("\n| 3 - Editar texto                               |");
+        printf("\n| 4 - Remover texto                              |");
+        printf("\n| 0 - Volta ao menu anterior                     |");
+        printf("\n|------------------------------------------------|");
+        printf("\n\n  TEXTO> ");
+        break;
+    case 3:
+        printf("\n|------------------DEFINICOES--------------------|");
+        printf("\n| 0 - Volta ao menu anterior                     |");
+        printf("\n|------------------------------------------------|");
+        printf("\n\n  DEFINICOES> \n");
+        break;
+    case 4:
+        printf("\n|---------------------DEBUG----------------------|");
+        printf("\n| 0 - Volta ao menu anterior                     |");
+        printf("\n|------------------------------------------------|");
+        printf("\n\n  DEBUG> ");
+        break;
+    case 5:
+        //coCreditos();
+        break; //Fim acao 2
+    default:
+        printf("\nErro logico n1\n");
+        break; //Fim acao 3
+    }
 }
 
 
@@ -290,8 +311,15 @@ void coListarOpcoes( int opcao)
 void coSaida()
 {
     printf("Fim de sessao do Corretor Ortografico\n");
+    coCreditos();
 }
 
+/**
+ *
+ *
+ * @param[in,out] Memoria Objeto global de memoria
+ * @return void
+ */
 void coTextoCarrega( COMemType *Memoria )
 {
     char path[255];
