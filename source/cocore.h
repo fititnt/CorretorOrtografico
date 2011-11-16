@@ -20,11 +20,16 @@
 //
 void coAjuda();
 //
+void coDebug(COMemType *Memoria);
+
+//
 void coCore();
 //
 void coCreditos();
 //
 void coDicionarioCarrega( COMemType *Memoria );
+//
+void coTextoCarrega( COMemType *Memoria );
 //
 int coDicionarioPalavraTolerada( char* termo );
 //
@@ -36,7 +41,37 @@ void coSaida();
 //
 int coQuestionaAcao();
 
+/**
+ * Questionario padrao de importacao de arquivo
+ *
+ * @param[out] path Local aonde se encontra o arquivo a ser carregado
+ * @param[out] idioma Idioma do item carregado
+ * @param[out] descricao Descricao adicional. Opcional, pode ser NULL
+ * @return sucesso 1 se sucesso, 0 se falha
+ * @private
+ */
+static int _coCarregaInformacoes( char *path , char *idioma, char *descricao)
+{
+    int sucesso = 1;
+    char filename[255]; char extension[255];/* char name[255]*/;//Get path info
 
+    printf("\n Insira caminho para o arquivo");
+    printf("\n arquivo> ");
+    fflush(stdin); //Limpar buffer
+    fsGetStr( path );
+    while( !fsFileOpen( path ) ){
+        printf("\n O Arquivo nao foi encontrado, ou nao esta disponivel para leitura. Revise:");
+        printf("\n arquivo> ");
+        fsGetStr( path );
+    }
+    fsPathInfo( path, filename, descricao, extension);
+    ///@todo Talvez implementar para o usuario a chance de sobrescrever a descricao
+    printf("\n Aceito arquivo \"%s\" \n", descricao);
+    printf("\n Informe o idioma desde arquivo:");
+    printf("\n idioma> ");
+    fsGetStr( idioma );
+    return sucesso;
+}
 
 /**
  * Corretor Ortografico - Help
@@ -68,11 +103,9 @@ void coCreditos()
     //
 }
 
-
 void coDicionarioCarrega( COMemType *Memoria )
 {
     char path[255];
-    //char line[256];
     char idioma[50];
 
     printf("\n Insira caminho para o arquivo");
@@ -117,6 +150,12 @@ void coDicionarioCarrega( COMemType *Memoria )
     //cohCarregaDicionario( *Memoria, path );
 }
 
+void coDebug(COMemType *Memoria){
+    printf("\n\n\n");
+    printf("\n         **DEBUG**         \n");
+    printf("Memoria: %i \n", sizeof(Memoria));
+    printf("\n         **DEBUG**         \n");
+}
 
 /**
  * Retorna se uma palavra pertente a um dicionario
@@ -205,7 +244,8 @@ void coListarOpcoes( int opcao)
                 printf("\n 1 - Gerenciar dicionarios");
                 printf("\n 2 - Gerenciar textos");
                 printf("\n 3 - Alterar definicoes desde programa");
-                printf("\n 4 - Creditos");
+                printf("\n 4 - Debug");
+                printf("\n 5 - Creditos");
                 printf("\n 0 - Encerra o programa");
                 printf("\n\n  Geral> ");
                 break; //Fim acao 0
@@ -226,6 +266,13 @@ void coListarOpcoes( int opcao)
                 printf("\n 0 - Volta ao menu anterior");
                 printf("\n\n  Texto> ");
                 break; //Fim acao 2
+            case 4:
+                //printf("\n     OPCOES DE TEXTO");
+                printf("\n\n  Debug> ");
+                break; //Fim acao 2
+            case 5:
+                //coCreditos();
+                break; //Fim acao 2
             default:
                 printf("\nErro logico n1\n");
                 break; //Fim acao 3
@@ -243,6 +290,16 @@ void coListarOpcoes( int opcao)
 void coSaida()
 {
     printf("Fim de sessao do Corretor Ortografico\n");
+}
+
+void coTextoCarrega( COMemType *Memoria )
+{
+    char path[255];
+    char idioma[255];
+    char descricao[255];
+    //char reservado //Array de opcoes reservadas
+    _coCarregaInformacoes( path, idioma, descricao );
+    cohTextoCarrega( Memoria, path, idioma, descricao );
 }
 
 

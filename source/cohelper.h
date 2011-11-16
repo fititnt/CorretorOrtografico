@@ -88,6 +88,8 @@ struct Textos
     struct AnaliseOrtografica *analise;
 
 };
+
+typedef struct Textos TextosType;
 /**
  * Struct para conter informacoes pertinentes a respeito do CorretorOrtografico
  * @
@@ -171,7 +173,8 @@ int cohCarregaDicionario( COMemType *Memoria, char *path, char *idioma )
     double i = 0;
     TypeSLLData definicao;
 
-    if (Memoria->dicionarios == NULL){
+    if (Memoria->dicionarios == NULL)
+    {
         Memoria->dicionarios = malloc(sizeof(DicionariosType));
     }
 
@@ -183,7 +186,8 @@ int cohCarregaDicionario( COMemType *Memoria, char *path, char *idioma )
     {
         while(!feof(file))
         {
-            if( fgets(line, 256, file) ){
+            if( fgets(line, 256, file) )
+            {
                 line[strlen(line) -1] = '\0';//Remove quebra de linha
                 strcpy(definicao.item, line);
                 Memoria->dicionarios->definicoes = insertSLLNode( Memoria->dicionarios->definicoes, definicao );
@@ -199,7 +203,20 @@ int cohCarregaDicionario( COMemType *Memoria, char *path, char *idioma )
     {
         return -1;//Erro de abertura
     }
+}
 
+/**
+ *
+ *
+* @return tamanho do texto, ou -2 se nao conseguir abrir o arquivo, -1 se nao puder ler
+ */
+int cohTextoCarrega( COMemType *Memoria, char *path, char *idioma , char *descricao)
+{
+    int tamanho;
+    char *content;
+    tamanho = fsFileToString(path, &content);
+    printf("%i", tamanho);
+    return tamanho;
 }
 
 

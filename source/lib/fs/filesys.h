@@ -188,6 +188,64 @@ int fsGetStr( char *str )
     return FinalLeigth;
 }
 
+/**
+ * Give some useful information about one filepath
+ * @example
+ * @code
+ *   char path[255] = "C:/Users/fititnt/en.dic";
+ *   char filename[255]; char extension[255]; char name[255];
+ *   fsPathInfo( path, filename, name, extension);
+ *   printf("\nPath: %s \nFilename: %s \nName: %s \nExtension: %s \n",path, filename, name, extension);
+ * @endcode
+ *
+ * @param[in] path
+ * @param[out] filename File name. Can be null
+ * @param[out] name
+ * @param[out] extension
+ * @return void
+ */
+void fsPathInfo(char *path, char *filename, char *name, char *extension)
+{
+    int i, j = 0, k = 0, l = 0, dot = 0;
+    if (filename == NULL){
+        char filename[255];
+    }
+    if (extension == NULL){
+        char extension[255];
+    }
+    if (name == NULL){
+        char name[255];
+    }
+    for( i=strlen(path); i > 0; --i){
+        if( path[i]=='\0'){
+            continue;
+        }
+        if( path[i]=='.'){
+            dot = 1;
+        }
+        if(  (char)path[i]=='\\' || (char)path[i] == '/'){
+            break;
+        }
+        if (dot == 0){
+            extension[j] = path[i];
+            ++j;
+        } else {
+            if( path[i]!='.'){
+            name[k] = path[i];
+            ++k;
+            }
+        }
+        filename[l] = path[i];
+        ++l;
+    }
+    extension[j] = '\0';
+    name[k] = '\0';
+    filename[l] = '\0';
+    strrev(extension);
+    strrev(name);
+    strrev(filename);
+    //printf("\nPath: %s \nFilename: %s \nName: %s \nExtension: %s \n",path, filename, name, extension);
+}
 
 
 #endif // FILESAVE_H_INCLUDED

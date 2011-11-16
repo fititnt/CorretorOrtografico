@@ -40,6 +40,48 @@ int main()
     //Memoria->dicionarios = NULL;
     //Memoria->dicionarios = malloc(sizeof(DicionariosType));
     //Memoria->dicionarios->definicoes = NULL;
+    //int tamanho;
+    //char *content;
+    //tamanho = fsFileToString("C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/dicionarios/en.dic", &content);
+    //printf("%i, %s", tamanho, content);
+
+    char path[255] = "C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/dicionarios/en.dic";
+    char filename[255]; char extension[255]; char name[255];
+    fsPathInfo( path, filename, name, extension);
+    /*
+    int i, j = 0, k = 0, l = 0, dot = 0;
+    for( i=strlen(path); i > 0; --i){
+        if( path[i]=='\0'){
+            continue;
+        }
+        if( path[i]=='.'){
+            dot = 1;
+        }
+        if(  (char)path[i]=='\\' || (char)path[i] == '/'){
+            break;
+        }
+        if (dot == 0){
+            extension[j] = path[i];
+            ++j;
+        } else {
+            if( path[i]!='.'){
+            name[k] = path[i];
+            ++k;
+            }
+        }
+        filename[l] = path[i];
+        ++l;
+    }
+    extension[j] = '\0';
+    name[k] = '\0';
+    filename[l] = '\0';
+    strrev(extension);
+    strrev(name);
+    strrev(filename);
+*/
+    printf("\nPath: %s \nFilename: %s \nName: %s \nExtension: %s \n",path, filename, name, extension);
+
+
 
     clock_t start;
     start = dbProfileStart();
@@ -51,62 +93,49 @@ int main()
     {
 
         coListarOpcoes( 0 );
-        acao = coOpcaoQuestiona(0, 4);
+        acao = coOpcaoQuestiona(0, 5);
 
         switch ( acao )
-        {
+        {                     //Gerenciar dicionarios   // Opcao geral 1: inicio
         case 1:
-            /**
-             * Opcao que define acoes gerais relativas aos dicionarios carregados
-             */
             coListarOpcoes( 1 );
-            subacao = coOpcaoQuestiona(0, 4);
+            subacao = coOpcaoQuestiona(0, 3);
             switch ( subacao )
             {
-            case 1:
+            case 1: //Adicionar dicionario
                 coDicionarioCarrega( Memoria );
                 break;
-            case 2:
-                coListarOpcoes( 2 );
-                subacao = coOpcaoQuestiona(0, 4);
+            case 2: //Editar dicionario existente
                 //coDicionarioGerencia();
                 break;
-            case 3:
-                coListarOpcoes( 3 );
-                subacao = coOpcaoQuestiona(0, 4);
+            case 3: //Remover dicionario
                 //coDicionarioEstatisticas();
                 break;
-            case 4:
-                //coDicionarioRemove();
-                break;
+            default: //Voltar menu
+                continue;
             }
-            break; //Fim acao 1
-        case 2:
-            /**
-             * Opcao que define acoes gerais relativas aos dicionarios carregados
-             */
+            break;                                      // Opcao geral 1: fim
+        case 2:                 //Gerenciar textos      // Opcao geral 2: inicio
             coListarOpcoes( 2 );
             subacao = coOpcaoQuestiona(0, 4);
             switch ( subacao )
             {
-            case 1:
-
+            case 1: //Adicionar texto
+                coTextoCarrega( Memoria );
                 break;
-            case 2:
+            case 2: //Re)Analizar texto
                 break;
             }
-
-            break; //Fim acao 2
-        case 3:
-            break; //Fim acao 3
-        case 4:
-            /**
-             * Exibe creditos
-             */
+            break;                                      // Opcao geral 2: fim
+        case 3:  //Alterar definicoes desde programa    // Opcao geral 3: inicio
+            break;                                      // Opcao geral 3: fim
+        case 4:                       //Debug           // Opcao geral 4: inicio
+            coDebug(Memoria);
+            break;                                      // Opcao geral 4: fim
+        case 5:                       //Creditos        // Opcao geral 5: inicio
             coCreditos();
-            break; //Fim acao 4
+            break;                                      // Opcao geral 5: fim
         }
-
     }
     while ( acao > 0 );
 
