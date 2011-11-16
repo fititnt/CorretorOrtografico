@@ -34,6 +34,8 @@ int main()
     COMemType *Memoria = malloc(sizeof(COMemType));
     Memoria = cohInicializaMemoria(Memoria);
 
+    //char content[256000];
+
     coInicio();
 
     do
@@ -42,7 +44,8 @@ int main()
         acao = coOpcaoQuestiona(0, 5);
 
         switch ( acao )
-        {                     //Gerenciar dicionarios   // Opcao geral 1: inicio
+        {
+            //Gerenciar dicionarios   // Opcao geral 1: inicio
         case 1:
             coListarOpcoes( 1 );
             subacao = coOpcaoQuestiona(0, 3);

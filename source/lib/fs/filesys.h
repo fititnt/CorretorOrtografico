@@ -75,6 +75,14 @@ int fsFileToArray( char path[], char *content[] )
 * Open a file and set its content for one 'string' (array of chars) to one
 * pointer, and return value of
 *
+* @example
+* @code
+*       char *content[256000];
+*       char *path = "file.txt"
+*       int leigth = fsFileToString(path, content);
+*       printf("\nLeigth: %i\n", leigth);
+* @endcode
+*
 * @param[in] path Path to file to save
 * @param[out] content Content of the file opened
 * @return leigth of content, or -2 if cannot open file or -1 if cannot read it
@@ -122,13 +130,13 @@ int fsRemove( char path[] )
 /**
  * Retorna se um arquivo pode ser aberto para leitura
  * @example
- *    int resultado;
- *    resultado = debugFileOpen("file.txt");
- *    if ( resultado == 1 ){
- *        printf("O arquivo pode ser aberto");
- *    } else {
- *        printf("O arquivo nao pode ser aberto");
- *    }
+      int resultado;
+      resultado = fsFileOpen("file.txt");
+      if ( resultado == 1 ){
+          printf("O arquivo pode ser aberto");
+      } else {
+          printf("O arquivo nao pode ser aberto");
+      }
  *
  * @param[in] char[] Local do arquivo
  * @return int 0 para nao, 1 para sim

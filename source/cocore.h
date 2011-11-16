@@ -10,9 +10,10 @@
 #ifndef COCORE_H_INCLUDED
 #define COCORE_H_INCLUDED
 
-
+#include <ctype.h> //isspace(c)
 #include "lib/data/singlylinkedlist.h"
 #include "cohelper.h"
+
 
 
 //Questionario padrao de importacao de arquivo
@@ -261,6 +262,95 @@ void coSaida()
     coCreditos();
 }
 
+
+
+int coTextoAnalisa( COMemType *Memoria, char *content, int leigth)
+{
+    //TypeSLLNode *palavras;
+    int i;
+    //int leigth = sizeof(content)/sizeof(char);
+//printf("%i", leigth);
+
+printf("%s", content);
+
+    for(i=0; i<leigth; i++)
+    {
+        if ( isspace((unsigned char)content[i])  )
+        {
+            //printf("____");
+        }
+    }
+
+    /*
+    int i, leigth = 0, letras = 0, palavras = 0, quebraDePalavra = 0;
+    char buffer[50];
+    char termos[20000][50];//Pode estourar o limite de bytes. Cuidado aqui
+    leigth = sizeof(content)/sizeof(char);
+
+    for(i=0; i<leigth; i++)
+    {
+        puts(content[i]);
+
+        if ( strcmp( content[i], " " ) == 0 )
+        {
+            if(letras == 0)
+            {
+                continue;//Sem palavras vazias, por favor
+            }
+            //buffer[letras] = '\0';//Fecha string
+            //strcpy(termos[palavras], buffer);
+            //++palavras;
+            //letras = 0;
+            //quebraDePalavra = 1;
+        }
+
+        //isspace((unsigned char)*content[i]) ;
+        //printf("%i ,",isspace((unsigned char)*content[1]));
+        //if ( isspace((unsigned char)*content[i])  )
+        //{
+            //if(letras == 0)
+            //{
+            //    continue;//Sem palavras vazias, por favor
+            //}
+            //buffer[letras] = '\0';//Fecha string
+            //strcpy(termos[palavras], buffer);
+            //++palavras;
+            //letras = 0;
+            //quebraDePalavra = 1;
+        //}
+
+    }
+    */
+    /*
+    if( (char)content[i]=='\0'
+            //|| (char)content[i]=='\t'
+            //|| (char)content[i]=="."
+            //|| (char)content[i]==","
+            //|| (char)content[i]=="."
+       ){
+        continue;
+    }
+
+    if( (char*)content[i]==' '){
+        if(letras < 0)
+        {
+            continue;//Sem palavras vazias, por favor
+        }
+        buffer[letras] = '\0';//Fecha string
+        strcpy(termos[palavras], buffer);
+        ++palavras;
+        letras = 0;
+        quebraDePalavra = 1;
+    }
+
+    ++letras;
+    quebraDePalavra = 0;
+    */
+return 1;
+}
+
+//void _coPalavraMonta
+
 /**
  * Interface com o usuario que viabiliza carregar um texto
  * Intermedia com a funcao cohTextoCarrega() do cohelper.h
@@ -280,16 +370,19 @@ void coTextoCarrega( COMemType *Memoria )
 
 void coTextoOpcoes( COMemType *Memoria )
 {
-    if (Memoria->dicionarios == NULL) {
+    if (Memoria->dicionarios == NULL)
+    {
         printf("\nCorretorOrtografico> Aviso: nenhum dicionario carregado");
     }
-    if (Memoria->textos == NULL) {
+    if (Memoria->textos == NULL)
+    {
         printf("\nCorretorOrtografico> Alerta: nenhum texto carregado!");
         printf("\nCorretorOrtografico> Insira testo para continuar");
         printf("\n");
         return;
     }
-    if ( Memoria->textos->completo != NULL){
+    if ( Memoria->textos->completo != NULL)
+    {
         TextoType *aux;
 
         printf("\nTextos Carregados\n");
