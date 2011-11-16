@@ -68,23 +68,6 @@ int fsFileToArray( char path[], char *content[] )
     }
     fclose ( fp );
 
-
-    /*
-        FILE *fp = fopen ( path, "r" );
-        if ( fp != NULL )
-        {
-            while ( fgets ( line, sizeof line, fp ) != NULL )
-            {
-                strcpy(content[i], line);
-                //printf("%s \n", content[i]);
-                ++i;
-            }
-            fclose ( fp );
-        } else
-        {
-            return -1; // -1, cannot open file
-        }
-        */
     return i;
 }
 

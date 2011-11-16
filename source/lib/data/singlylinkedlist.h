@@ -26,7 +26,12 @@ struct DataSLL
  */
 typedef struct DataSLL TypeSLLData; //Define one Type of this element
 
-//Struct of node used on list
+
+/**
+ * Define TypeSLLNode as Type of NodeSLL
+ */
+typedef struct NodeSLL TypeSLLNode;  //Define one Type of this element
+
 /**
  * Struct that hold node especification
  *
@@ -39,10 +44,7 @@ struct NodeSLL
     struct NodeSLL* next;
 };
 
-/**
- * Define TypeSLLNode as Type of NodeSLL
- */
-typedef struct NodeSLL TypeSLLNode;  //Define one Type of this element
+
 
 //initializeSLL Node (set to NULL)
 TypeSLLNode *initializeSLL(void);

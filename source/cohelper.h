@@ -4,7 +4,10 @@
 #include "lib/data/singlylinkedlist.h"
 #include "cocore.h"
 
-
+/**
+ *
+ */
+typedef struct Benchmarks BenchmarkType;
 
 /**
  * Struct para conter bemchmark de uma acao
@@ -27,6 +30,10 @@ struct Benchmarks
     struct Benchmarks *proximo;
 };
 
+/**
+ *
+ */
+ typedef struct Dicionarios DicionariosType;
 
 /**
  *
@@ -44,17 +51,7 @@ struct Dicionarios
     TypeSLLNode *definicoes;
     //TipoDeCache cacheDefinidas
     //TipoDeCache cacheIndefinidas
-    struct Dicionarios *proximo;
-};
-
-typedef struct Dicionarios DicionariosType;
-
-/**
- *
- */
-struct Palavras
-{
-    //
+    DicionariosType *proximo;
 };
 
 /**
@@ -67,6 +64,9 @@ struct AnaliseOrtografica
 {
     //
 };
+
+typedef struct Textos TextoType;
+
 /**
  * Reune os textos usados e testados
  *
@@ -84,9 +84,17 @@ struct Textos
     struct Palavras *palavras;
     struct Dicionarios *dicionario;
     struct AnaliseOrtografica *analise;
+    char *completo; //2560000
+    char *idioma; //50
+    char *titulo; //50
+    TextoType *proximo;
 };
 
-typedef struct Textos TextosType;
+/**
+ *
+ */
+ typedef struct COMem COMemType;
+
 /**
  * Struct para conter informacoes pertinentes a respeito do CorretorOrtografico
  * @
@@ -95,11 +103,13 @@ typedef struct Textos TextosType;
  */
 struct COMem
 {
-    struct Benchmarks *benchmarks;
-    struct Dicionarios *dicionarios;
+    BenchmarkType *benchmarks;
+    DicionariosType *dicionarios;
+    TextoType *textos;
+
 };
 
-typedef struct COMem COMemType;
+
 
 /**
  * Inicializa COMemType
@@ -111,6 +121,7 @@ COMemType *cohInicializaMemoria( COMemType *Memoria)
 {
     Memoria->dicionarios = NULL;
     Memoria->benchmarks = NULL;
+    Memoria->textos = NULL;
     return Memoria;
 }
 
@@ -218,7 +229,75 @@ int cohTextoCarrega( COMemType *Memoria, char *path, char *idioma , char *descri
     int tamanho;
     char *content;
     tamanho = fsFileToString(path, &content);
-    printf("%i", tamanho);
+
+    if (tamanho < 0){
+        printf("\nCorretorOrtografico: ERRO! Arquivo nao foi encontrado");
+        return -1;
+    }
+
+    //Caso ainda nao haja textos, inicializar
+    if (Memoria->textos == NULL)
+    {
+        Memoria->textos = malloc(sizeof(TextoType));
+        //Memoria->textos->palavras
+        Memoria->textos->analise = NULL;
+        Memoria->textos->completo = NULL;
+        Memoria->textos->dicionario = NULL;
+        Memoria->textos->proximo = NULL;
+        //Memoria->textos->
+    }
+    //Com os textos inicializados, checar se o objeto atual tem um texto carregado
+    if (Memoria->textos->completo == NULL)
+    {
+        Memoria->textos->idioma = malloc(sizeof(char)*50);
+        Memoria->textos->titulo = malloc(sizeof(char)*50);
+        Memoria->textos->completo = malloc(sizeof(char)*2560000);
+
+        strcpy(Memoria->textos->idioma, idioma);
+        strcpy(Memoria->textos->titulo, descricao);
+        strcpy(Memoria->textos->completo, content);
+    }
+    else
+    {
+        //O Objeto atual de texto esta preenchido. Carregar o proximo
+
+        TextoType *newItem;
+        TextoType *last = NULL;
+        TextoType *aux = Memoria->textos;
+        newItem = malloc(sizeof(TextoType));
+        newItem->proximo = malloc(sizeof(TextoType));
+        newItem->idioma = malloc(sizeof(char)*50);
+        newItem->titulo = malloc(sizeof(char)*50);
+        newItem->completo = malloc(sizeof(char)*2560000);
+        strcpy(newItem->completo, content);
+        strcpy(newItem->idioma, idioma);
+        strcpy(newItem->titulo, descricao);
+
+
+        while (( aux != NULL ) && ( strcmp(aux->completo, newItem->completo ) < 0 ))
+        {
+            last = aux;
+            aux = aux->proximo;
+        }
+        if (last == NULL)
+        {
+            //If last does not exist, insert at start of the list
+            newItem->proximo = Memoria->textos;
+            Memoria->textos = newItem;
+        }
+        else
+        {
+            //Last exist, so insert at middle of list
+            newItem->proximo = last->proximo;
+            last->proximo = newItem;
+        }
+
+
+
+    }
+
+
+
     return tamanho;
 }
 

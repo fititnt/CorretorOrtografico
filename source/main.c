@@ -70,6 +70,7 @@ int main()
                 coTextoCarrega( Memoria );
                 break;
             case 2: //Re)Analizar texto
+                coTextoOpcoes( Memoria );
                 break;
             }
             break;                                      // Opcao geral 2: fim

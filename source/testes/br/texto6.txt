@@ -1,4 +1,4 @@
-<pre><p>Vida sem e-mail &eacute; &quot;pior que acidente de carro&quot;
+Vida sem e-mail &eacute; &quot;pior que acidente de carro&quot;
 
 Uma semana sem e-mail &eacute; mais estressante que mudar de casa, sofrer um acidente de carro ou at&eacute; 
 mesmo se casar ou pedir o div&oacute;rcio, relata um estudo feito pela empresa de software Veritas com 
@@ -17,4 +17,4 @@ est&aacute; fora do back-up automatizado e apenas 18% das companhias disseram se
 as mensagens de mais de um ano atr&aacute;s - e apenas uma em dez consegue fazer isso com e-mails da semana anterior.
 
 O estudo foi feito com 850 gerentes de tecnologia em companhias com mais de 500 funcion&aacute;rios na Europa, 
-Estados Unidos, Su&iacute;&ccedil;a, &Aacute;frica do Sul, Pol&ocirc;nia e Oriente M&eacute;dio. </p></pre>
+Estados Unidos, Su&iacute;&ccedil;a, &Aacute;frica do Sul, Pol&ocirc;nia e Oriente M&eacute;dio. 

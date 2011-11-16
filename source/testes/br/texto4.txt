@@ -1,4 +1,4 @@
-<pre><p>		      LICEN&Ccedil;A P&Uacute;BLICA GERAL GNU
+		      LICEN&Ccedil;A P&Uacute;BLICA GERAL GNU
 		       Vers&atilde;o 2, junho de 1991
 
  This is an unofficial translation of the GNU General Public License
@@ -380,4 +380,3 @@ programas propriet&aacute;rios. Se seu programa &eacute; uma biblioteca de
 sub-rotinas, voc&ecirc; deve considerar mais &uacute;til permitir ligar aplica&ccedil;&otilde;es
 propriet&aacute;rias com a biblioteca. Se isto &eacute; o que voc&ecirc; deseja, use a
 Licen&ccedil;a P&uacute;blica Geral de Bibliotecas GNU, ao inv&eacute;s desta Licen&ccedil;a.
-</p></pre>

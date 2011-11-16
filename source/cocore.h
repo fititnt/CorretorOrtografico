@@ -51,20 +51,20 @@ static int _coCarregaInformacoes( char *path , char *idioma, char *descricao)
     char filename[255];
     char extension[255];/* char name[255]*/;//Get path info
 
-    printf("\n Insira caminho para o arquivo");
+    printf("\nCorretorOrtografico: Insira caminho para o arquivo");
     printf("\n arquivo> ");
     fflush(stdin); //Limpar buffer
     fsGetStr( path );
     while( !fsFileOpen( path ) )
     {
-        printf("\n O Arquivo nao foi encontrado, ou nao esta disponivel para leitura. Revise:");
+        printf("\nCorretorOrtografico: O Arquivo nao foi encontrado, ou nao esta disponivel para leitura. Revise:");
         printf("\n arquivo> ");
         fsGetStr( path );
     }
     fsPathInfo( path, filename, descricao, extension);
     ///@todo Talvez implementar para o usuario a chance de sobrescrever a descricao
-    printf("\n Aceito arquivo \"%s\" \n", descricao);
-    printf("\n Informe o idioma desde arquivo:");
+    printf("\nCorretorOrtografico: Aceito arquivo \"%s\"", descricao);
+    printf("\nCorretorOrtografico: Informe o idioma desde arquivo:");
     printf("\n idioma> ");
     fsGetStr( idioma );
     return sucesso;
@@ -105,16 +105,16 @@ void coDicionarioCarrega( COMemType *Memoria )
     char path[255];
     char idioma[50];
 
-    printf("\n Insira caminho para o arquivo");
+    printf("\nCorretorOrtografico: Insira caminho para o arquivo");
     printf("\n arquivo> ");
     fsGetStr( path );
     while( !fsFileOpen( path ) )  //@todo checar se arquivo existe e pode ser lido
     {
-        printf("\n O Arquivo nao foi encontrado, ou nao esta disponivel para leitura. Revise:");
+        printf("\nCorretorOrtografico: O Arquivo nao foi encontrado, ou nao esta disponivel para leitura. Revise:");
         printf("\n arquivo> ");
         fsGetStr( path );
     }
-    printf("\n Nome do idioma:");
+    printf("\nCorretorOrtografico: Nome do idioma:");
     printf("\n idioma> ");
     fsGetStr( idioma );
 
@@ -182,7 +182,7 @@ int coOpcaoQuestiona( int min, int max )
     scanf("%i", &entrada);
     while ( !(entrada >= min) || !(entrada <=max) )
     {
-        printf("\nResposta nao conforme Informe um valor valido entre %i e %i\n\n  Novo valor>", min, max);
+        printf("\nCorretorOrtografico: Resposta nao conforme Informe um valor valido entre %i e %i\n\n  Novo valor>", min, max);
         scanf("%i", &entrada);
     }
     return entrada;
@@ -242,7 +242,7 @@ void coListarOpcoes( int opcao)
         //coCreditos();
         break; //Fim acao 2
     default:
-        printf("\nErro logico n1\n");
+        printf("\nCorretorOrtografico: Erro logico n1\n");
         break; //Fim acao 3
     }
 }
@@ -257,7 +257,7 @@ void coListarOpcoes( int opcao)
  */
 void coSaida()
 {
-    printf("Fim de sessao do Corretor Ortografico\n");
+    printf("CorretorOrtografico: Fim de sessao do Corretor Ortografico\n");
     coCreditos();
 }
 
@@ -277,6 +277,29 @@ void coTextoCarrega( COMemType *Memoria )
     _coCarregaInformacoes( path, idioma, descricao );
     cohTextoCarrega( Memoria, path, idioma, descricao );
 }
+
+void coTextoOpcoes( COMemType *Memoria )
+{
+    if (Memoria->dicionarios == NULL) {
+        printf("\nCorretorOrtografico> Aviso: nenhum dicionario carregado");
+    }
+    if (Memoria->textos == NULL) {
+        printf("\nCorretorOrtografico> Alerta: nenhum texto carregado!");
+        printf("\nCorretorOrtografico> Insira testo para continuar");
+        printf("\n");
+        return;
+    }
+    if ( Memoria->textos->completo != NULL){
+        TextoType *aux;
+
+        printf("\nTextos Carregados\n");
+        for ( aux = Memoria->textos; aux!=NULL; aux=aux->proximo)
+        {
+            printf("%s: %s\n", aux->idioma, aux->titulo);
+        }
+    }
+}
+
 
 
 
