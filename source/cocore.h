@@ -72,7 +72,7 @@ void coCreditos()
 void coDicionarioCarrega( COMemType *Memoria )
 {
     char path[255];
-    char line[256];
+    //char line[256];
     char idioma[50];
 
     printf("\n Insira caminho para o arquivo");
@@ -87,11 +87,13 @@ void coDicionarioCarrega( COMemType *Memoria )
     printf("\n idioma> ");
     fsGetStr( idioma );
 
-    if ( Memoria->dicionarios != NULL ){
-
+    //Se o dicionario e' NULL, quer dizer que foi recentemente inicializado,
+    //logo, precisa-se alocar mais espaco em memoria para alguns itens
+    if ( Memoria->dicionarios == NULL ){
+        //Memoria->dicionarios = cohInicializaDicionarios(Memoria->dicionarios);
     }
 
-    cohCarregaDicionario( Memoria, path);
+    cohCarregaDicionario( Memoria, path, idioma);
 
     /*
     FILE *file = fopen ( path , "r" );//C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/dicionarios/en.dic

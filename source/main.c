@@ -37,6 +37,9 @@ int main()
     int acao, subacao;
     COMemType *Memoria = malloc(sizeof(COMemType));
     Memoria = cohInicializaMemoria(Memoria);
+    //Memoria->dicionarios = NULL;
+    //Memoria->dicionarios = malloc(sizeof(DicionariosType));
+    //Memoria->dicionarios->definicoes = NULL;
 
     clock_t start;
     start = dbProfileStart();

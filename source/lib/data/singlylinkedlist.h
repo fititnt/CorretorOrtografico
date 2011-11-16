@@ -45,24 +45,24 @@ struct NodeSLL
 typedef struct NodeSLL TypeSLLNode;  //Define one Type of this element
 
 //initializeSLL Node (set to NULL)
-struct NodeSLL* initializeSLL(void);
+TypeSLLNode *initializeSLL(void);
 //Insert one new value to the list
-struct NodeSLL* insertSLLNode (struct NodeSLL* list, TypeSLLData data);
+TypeSLLNode *insertSLLNode (TypeSLLNode *list, TypeSLLData data);
 //Print all elements of one list
 void printSLLList(struct NodeSLL* list);
 //Remove entire list, i.e., free memory usage of all elements
 void removeSLLList(struct NodeSLL* list);
 //Remove one node with one respective data value and return resultant list
-struct NodeSLL* removeSLLNode(struct NodeSLL* list, TypeSLLData data);
+TypeSLLNode * removeSLLNode(struct NodeSLL* list, TypeSLLData data);
 //Search for one data in one list
-struct NodeSLL* searchSLLNode( struct NodeSLL* list, TypeSLLData data);
+TypeSLLNode * searchSLLNode( struct NodeSLL* list, TypeSLLData data);
 
 /**
  * initializeSLL Node (set to NULL)
  *
  * @return NULL
  */
-struct NodeSLL* initializeSLL(void)
+TypeSLLNode *initializeSLL(void)
 {
     return NULL;
 }
@@ -74,7 +74,7 @@ struct NodeSLL* initializeSLL(void)
  * @param[in] data Data for insert
  * @return TypeSLLNode list: Resultant list
  */
-struct NodeSLL* insertSLLNode (struct NodeSLL* list, TypeSLLData data)
+TypeSLLNode *insertSLLNode (TypeSLLNode *list, TypeSLLData data)
 {
     struct NodeSLL* newItem;
     struct NodeSLL* last = NULL;
@@ -151,7 +151,7 @@ void removeSLLList(struct NodeSLL* list)
  * @param[in] data Data for search to remove
  * @return list Resultant list
  */
-struct NodeSLL* removeSLLNode(struct NodeSLL* list, TypeSLLData data)
+TypeSLLNode *removeSLLNode(struct NodeSLL* list, TypeSLLData data)
 {
     struct NodeSLL* last = NULL;
     struct NodeSLL* aux = list;
@@ -195,7 +195,7 @@ struct NodeSLL* removeSLLNode(struct NodeSLL* list, TypeSLLData data)
  * @param[in] data Data for search
  * @return aux Node if find, NULL if not find element
  */
-struct NodeSLL* searchSLLNode( struct NodeSLL* list, TypeSLLData data)
+TypeSLLNode *searchSLLNode( struct NodeSLL* list, TypeSLLData data)
 {
     struct NodeSLL* last = NULL;
     struct NodeSLL* aux = list;

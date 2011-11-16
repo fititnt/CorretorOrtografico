@@ -31,7 +31,7 @@ struct Benchmarks
 
 /**
  *
- * @param idioma[20] Nome do idioma
+ * @param idioma[50] Nome do idioma
  * @param quantia Numero de definicoes (palavras) que contem
  * @param definicoes Palavras contidas no dicionario
  * @param cacheDefinidas Cache com termos frequentes e definidos no dicionario
@@ -41,14 +41,15 @@ struct Benchmarks
  */
 struct Dicionarios
 {
-    char idioma[20];
+    char idioma[50];
     double quantia;
-    //TipoDeDicionario definicoes
+    TypeSLLNode *definicoes;
     //TipoDeCache cacheDefinidas
     //TipoDeCache cacheIndefinidas
     struct Dicionarios *proximo;
 };
 
+typedef struct Dicionarios DicionariosType;
 
 /**
  *
@@ -103,13 +104,52 @@ struct COMem
 typedef struct COMem COMemType;
 
 
-
+/**
+ * Inicializa COMemType
+ *
+ *
+ */
 COMemType *cohInicializaMemoria( COMemType *Memoria)
 {
     Memoria->dicionarios = NULL;
     Memoria->benchmarks = NULL;
     return Memoria;
 }
+
+/**
+ * Aloca memoria para DicionariosType (um novo item de dicionario)
+ * Aloca espaco na memoria para os objetos
+ *
+ * @param[in,out] dicionarios Poteiro para DicionariosType
+ * @return dicionario
+ */
+DicionariosType *cohAlocaDicionarios( DicionariosType * dicionario)
+{
+    //dicionario->definicoes = malloc(sizeof(TypeSLLNode*));
+    dicionario->definicoes = initializeSLL();
+    //dicionario->idioma = malloc(sizeof(char)*50);//char idioma[50]
+    //dicionario->proximo = malloc(sizeof(DicionariosType*));
+    //dicionario->quantia = malloc(sizeof(double));
+    return dicionario;
+}
+
+/**
+ * Inicializa DicionariosType (um novo item de dicionario)
+ * Inicializa com valor inicial NULL
+ *
+ * @param[in,out] dicionarios Poteiro para DicionariosType
+ * @return dicionario
+ */
+DicionariosType *cohInicializaDicionarios( DicionariosType * dicionario)
+{
+    dicionario->definicoes = NULL;
+    //dicionario->idioma = NULL;
+    dicionario->proximo = NULL;
+    //dicionario->quantia = NULL;
+    return dicionario;
+}
+
+
 /*
 int cohDicionarioAdiciona( COMemType *Memoria, )
 {
@@ -122,11 +162,21 @@ int cohDicionarioAdiciona( COMemType *Memoria, )
  * Carrega um arquivo de dicionario para a memoria
  * @warning O arquivo deve ter sido testado para ver se e' possivel ler previamente
  * test with C:\Users\fititnt\github\fititnt\CorretorOrtografico\source\testes\en\texto1.txt
+ * @warning Ira adicionar mais de um dicionario com o mesmo idioma. Caso seja decejado o contrario, trate esse erro antes
  *
  */
-int cohCarregaDicionario( COMemType *Memoria, char *path )
+int cohCarregaDicionario( COMemType *Memoria, char *path, char *idioma )
 {
     char line[256];
+    double i = 0;
+    TypeSLLData definicao;
+
+    if (Memoria->dicionarios == NULL){
+        Memoria->dicionarios = malloc(sizeof(DicionariosType));
+    }
+
+    Memoria->dicionarios->definicoes = initializeSLL();
+    //Memoria->dicionarios->quantia = 2.0;
 
     FILE *file = fopen ( path , "r" );//C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/dicionarios/en.dic
     if ( file != NULL)
@@ -134,15 +184,20 @@ int cohCarregaDicionario( COMemType *Memoria, char *path )
         while(!feof(file))
         {
             if( fgets(line, 256, file) ){
-                line[strlen(line) -1] = '\0';//Remove linebreak
-                printf("%s", line);
+                line[strlen(line) -1] = '\0';//Remove quebra de linha
+                strcpy(definicao.item, line);
+                Memoria->dicionarios->definicoes = insertSLLNode( Memoria->dicionarios->definicoes, definicao );
+                //printf("%s ,", line);
             }
+            ++i;
         }
-        return 1; //Arquivo pode ser aberto
+        Memoria->dicionarios->quantia = (double)i;
+        printf("\n %g - %g\n", i, Memoria->dicionarios->quantia);
+        return i; //Retorna a quantidade de linhas adicionadas
     }
     else
     {
-        return -1;
+        return -1;//Erro de abertura
     }
 
 }
