@@ -295,9 +295,6 @@ int cohTextoCarrega( COMemType *Memoria, char *path, char *idioma , char *descri
 
 
     }
-
-
-
     return tamanho;
 }
 

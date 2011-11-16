@@ -263,90 +263,61 @@ void coSaida()
 }
 
 
-
-int coTextoAnalisa( COMemType *Memoria, char *content, int leigth)
+/**
+ *
+ * @see http://www.chemie.fu-berlin.de/chemnet/use/info/libc/libc_4.html
+ *
+ *
+ */
+int coTextoAnalisa( COMemType *Memoria, char *content)
 {
-    //TypeSLLNode *palavras;
+    printf("\ncoTextoAnalisa\n");
+
+    //printf(" %i ", strlen(content) );
+    //printf("%s", content);
+
+    TypeSLLNode *Node = initializeSLL();
+    TypeSLLData data;// = malloc(sizeof(TypeSLLData) );
+    //data.item = (char*) malloc( sizeof(char)* 100);
+    //strcpy(data.item, "teste");
+    //strcpy(data.item, "testewwwww");
+
+    printf("Palavra %s \n", data.item );
     int i;
-    //int leigth = sizeof(content)/sizeof(char);
-//printf("%i", leigth);
+    int tamanho = strlen(content);
 
-printf("%s", content);
 
-    for(i=0; i<leigth; i++)
-    {
-        if ( isspace((unsigned char)content[i])  )
-        {
-            //printf("____");
-        }
-    }
-
-    /*
-    int i, leigth = 0, letras = 0, palavras = 0, quebraDePalavra = 0;
-    char buffer[50];
-    char termos[20000][50];//Pode estourar o limite de bytes. Cuidado aqui
+    int  leigth = 0, letras = 0, palavras = 0, quebraDePalavra = 0;
+    char buffer[100];
+    char *termos[10000];//Pode estourar o limite de bytes. Cuidado aqui
     leigth = sizeof(content)/sizeof(char);
 
-    for(i=0; i<leigth; i++)
+    for(i=0; i<tamanho; ++i)
     {
-        puts(content[i]);
 
-        if ( strcmp( content[i], " " ) == 0 )
+        if(isspace(*(content + i)))// '  ',\f ,\n ,\r, \t, \v
         {
             if(letras == 0)
             {
                 continue;//Sem palavras vazias, por favor
             }
-            //buffer[letras] = '\0';//Fecha string
-            //strcpy(termos[palavras], buffer);
-            //++palavras;
-            //letras = 0;
-            //quebraDePalavra = 1;
+            buffer[letras] = '\0';//Fecha string
+            strcpy( data.item , buffer);
+            Node = insertSLLNode(Node,data);
+            ++palavras;
+            letras = 0;
+            quebraDePalavra = 1;
+            //printf("Palavra %i (%i): %s, >%s (%i)< \n",palavras, strlen(buffer), buffer, data.item, strlen(data.item) );
         }
-
-        //isspace((unsigned char)*content[i]) ;
-        //printf("%i ,",isspace((unsigned char)*content[1]));
-        //if ( isspace((unsigned char)*content[i])  )
-        //{
-            //if(letras == 0)
-            //{
-            //    continue;//Sem palavras vazias, por favor
-            //}
-            //buffer[letras] = '\0';//Fecha string
-            //strcpy(termos[palavras], buffer);
-            //++palavras;
-            //letras = 0;
-            //quebraDePalavra = 1;
-        //}
-
-    }
-    */
-    /*
-    if( (char)content[i]=='\0'
-            //|| (char)content[i]=='\t'
-            //|| (char)content[i]=="."
-            //|| (char)content[i]==","
-            //|| (char)content[i]=="."
-       ){
-        continue;
-    }
-
-    if( (char*)content[i]==' '){
-        if(letras < 0)
+        if(isalnum(content[i]))//Se for alfanumerico
         {
-            continue;//Sem palavras vazias, por favor
+            buffer[letras]= tolower( content[i] );
+            ++letras;
         }
-        buffer[letras] = '\0';//Fecha string
-        strcpy(termos[palavras], buffer);
-        ++palavras;
-        letras = 0;
-        quebraDePalavra = 1;
     }
+    printSLLList(Node);
 
-    ++letras;
-    quebraDePalavra = 0;
-    */
-return 1;
+    return 1;
 }
 
 //void _coPalavraMonta
@@ -389,8 +360,12 @@ void coTextoOpcoes( COMemType *Memoria )
         for ( aux = Memoria->textos; aux!=NULL; aux=aux->proximo)
         {
             printf("%s: %s\n", aux->idioma, aux->titulo);
+            //printf("\n\n\%s \n\n\n", aux->completo);
         }
     }
+
+    coTextoAnalisa(Memoria, Memoria->textos->completo );
+
 }
 
 
