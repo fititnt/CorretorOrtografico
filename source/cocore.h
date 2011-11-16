@@ -15,31 +15,26 @@
 #include "cohelper.h"
 
 
-
-
-//
+//Questionario padrao de importacao de arquivo
+static int _coCarregaInformacoes( char *path , char *idioma, char *descricao);
+//Tela de ajuda
 void coAjuda();
-//
+//Interface com o usuario que exibe informacoes pertinetnes de debug
 void coDebug(COMemType *Memoria);
-
-//
-void coCore();
-//
-void coCreditos();
-//
-void coDicionarioCarrega( COMemType *Memoria );
-//
-void coTextoCarrega( COMemType *Memoria );
-//
-int coDicionarioPalavraTolerada( char* termo );
-//
+//Retorna se uma palavra pertente a um dicionario do tipo Simples,
 int coDicionarioSimplesPalavraPertence( char** dicionario, char * termo );
-//
+//Creditos do programa
+void coCreditos();
+//Interface com o usuario que viabiliza carregar um dicionario
+void coDicionarioCarrega( COMemType *Memoria );
+//Informacoes exibidas na inicializacao do programa
 void coInicio();
-//
+//Informacoes exibidas ao final da excecucao do programa
 void coSaida();
-//
-int coQuestionaAcao();
+//Trata a entrada de usuario para um valor numerico valido aceitavel
+int coOpcaoQuestiona( int min, int max );
+//Interface com o usuario que viabiliza carregar um texto
+void coTextoCarrega( COMemType *Memoria );
 
 /**
  * Questionario padrao de importacao de arquivo
@@ -76,7 +71,7 @@ static int _coCarregaInformacoes( char *path , char *idioma, char *descricao)
 }
 
 /**
- * Corretor Ortografico - Help
+ * Tela de ajuda
  *
  * @return void
  */
@@ -85,18 +80,8 @@ void coAjuda()
     //
 }
 
-
-
-
-void coCore()
-{
-    //
-}
-
-
-
 /**
- * Corretor Ortografico - Credits
+ * Creditos do programa
  *
  * @return void
  */
@@ -108,6 +93,13 @@ void coCreditos()
     printf("\nRepositorio: https://github.com/fititnt/CorretorOrtografico\n\n");
 }
 
+/**
+ * Interface com o usuario que viabiliza carregar um dicionario
+ * Intermedia com a funcao cohCarregaDicionario() do cohelper.h
+ *
+ * @param[in,out] Memoria Memoria Objeto global de memoria
+ * @return void
+ */
 void coDicionarioCarrega( COMemType *Memoria )
 {
     char path[255];
@@ -134,29 +126,14 @@ void coDicionarioCarrega( COMemType *Memoria )
     }
 
     cohCarregaDicionario( Memoria, path, idioma);
-
-    /*
-    FILE *file = fopen ( path , "r" );//C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/dicionarios/en.dic
-    if ( file != NULL)
-    {
-        while(!feof(file))
-        {
-            if( fgets(line, 256, file) ){
-                line[strlen(line) -1] = '\0';//Remove linebreak
-                printf("%s", line);
-
-            }
-        }
-        return; //Arquivo pode ser aberto
-    }
-    else
-    {
-        printf("File cannot be opened");
-    }
-    */
-    //cohCarregaDicionario( *Memoria, path );
 }
 
+/**
+ * Interface com o usuario que exibe informacoes pertinetnes de debug
+ *
+ * @param[in,out] Memoria Objeto global de memoria
+ * @return void
+ */
 void coDebug(COMemType *Memoria)
 {
     printf("\n");
@@ -165,67 +142,37 @@ void coDebug(COMemType *Memoria)
     printf("\n|------------------------------------------------|\n");
 }
 
-/**
- * Retorna se uma palavra pertente a um dicionario
- *
- * @param[in] char* termo Termo a ser pesquisado
- * @return int 2 se palavra livremente aceita, 1 se tolerada e 0 se intolerada
- */
-int coDicionarioPalavraTolerada( char* termo )
-{
-    //@todo ...
-    return 1;
-}
 
 /**
  * Retorna se uma palavra pertente a um dicionario do tipo Simples, isto e', um
  * dicionario que contem apenas um array de palavras
  *
+ * @deprecated
  * @param[in] char** dicionario Dicionario base para a pesquisa
  * @param[in] char* termo Termo a ser pesquisado
  * @return int 1 se pertence (exato), 0 se termo tolerado e -1 se termo estranho
  */
 int coDicionarioSimplesPalavraPertence( char** dicionario, char * termo )
 {
-    int tolerancia;
-    tolerancia = coDicionarioPalavraTolerada(termo);
+    int tolerancia = 1;
+    //tolerancia = coDicionarioPalavraTolerada(termo);
     //@todo ...
     return tolerancia;
 }
 
 
 /**
- * Corretor Ortografico - Start
+ * Informacoes exibidas na inicializacao do programa
  *
  * @return void
  */
 void coInicio()
 {
-    /*
-    char *content;
-    int i, linhas;
-
-    linhas = getFileToArray( "DICIONARIO_PATH", &content);
-
-    for( i = 0; i < linhas;  ++i)
-    {
-        printf("%s \n", (content + i) );
-    }
-
-    printf("%i \n", linhas);
-    */
     printf("Inicio do Corretor Ortografico\n");
-
 }
-/*
-static int coLoadToSinglyLinkedList(char * path, TypeSLLNode* node)
-{
 
-    return 0;
-}
-*/
 /**
- * trata a entrada de usuario para um valor valido aceitavel
+ * Trata a entrada de usuario para um valor numerico valido aceitavel
  *
  * @return void
  */
@@ -304,7 +251,7 @@ void coListarOpcoes( int opcao)
 
 
 /**
- * Corretor Ortografico - End
+ * Informacoes exibidas ao final da excecucao do programa
  *
  * @return void
  */
@@ -315,9 +262,10 @@ void coSaida()
 }
 
 /**
+ * Interface com o usuario que viabiliza carregar um texto
+ * Intermedia com a funcao cohTextoCarrega() do cohelper.h
  *
- *
- * @param[in,out] Memoria Objeto global de memoria
+ * @param[in,out] Memoria Memoria Objeto global de memoria
  * @return void
  */
 void coTextoCarrega( COMemType *Memoria )

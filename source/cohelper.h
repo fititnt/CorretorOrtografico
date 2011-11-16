@@ -16,7 +16,6 @@
  * @param FinalDeAcao Tempo final de excecucao de uma acao
  * @param TempoDeExcecucao Tempo computado de escecucao de uma acao, em segundos
  * @param proximo Ponteiro para o proximo benchmark
- *
  */
 struct Benchmarks
 {
@@ -37,7 +36,6 @@ struct Benchmarks
  * @param cacheDefinidas Cache com termos frequentes e definidos no dicionario
  * @param cacheIndefinidas Cache com termos frequentes, porem nao definidos
  * @param proximo Ponteiro para o proximo item
- *
  */
 struct Dicionarios
 {
@@ -86,7 +84,6 @@ struct Textos
     struct Palavras *palavras;
     struct Dicionarios *dicionario;
     struct AnaliseOrtografica *analise;
-
 };
 
 typedef struct Textos TextosType;
@@ -100,16 +97,15 @@ struct COMem
 {
     struct Benchmarks *benchmarks;
     struct Dicionarios *dicionarios;
-
 };
 
 typedef struct COMem COMemType;
 
-
 /**
  * Inicializa COMemType
  *
- *
+ * @param Memoria Objeto global de memoria
+ * @return Memoria Objeto global de memoria
  */
 COMemType *cohInicializaMemoria( COMemType *Memoria)
 {
@@ -166,6 +162,10 @@ int cohDicionarioAdiciona( COMemType *Memoria, )
  * test with C:\Users\fititnt\github\fititnt\CorretorOrtografico\source\testes\en\texto1.txt
  * @warning Ira adicionar mais de um dicionario com o mesmo idioma. Caso seja decejado o contrario, trate esse erro antes
  *
+ * @param[in,out] Memoria Objeto global de memoria
+ * @param[in] path Local aonde se encontra o arquivo a ser carregado
+ * @param[in] idioma Idioma do item carregado
+ * @return int
  */
 int cohCarregaDicionario( COMemType *Memoria, char *path, char *idioma )
 {
@@ -207,8 +207,11 @@ int cohCarregaDicionario( COMemType *Memoria, char *path, char *idioma )
 
 /**
  *
- *
-* @return tamanho do texto, ou -2 se nao conseguir abrir o arquivo, -1 se nao puder ler
+ * @param[in,out] Memoria Objeto global de memoria
+ * @param[in] path Local aonde se encontra o arquivo a ser carregado
+ * @param[in] idioma Idioma do item carregado
+ * @param[out] descricao Descricao adicional. Opcional, pode ser NULL
+ * @return tamanho do texto, ou -2 se nao conseguir abrir o arquivo, -1 se nao puder ler
  */
 int cohTextoCarrega( COMemType *Memoria, char *path, char *idioma , char *descricao)
 {
