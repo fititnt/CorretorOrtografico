@@ -41,7 +41,7 @@ struct NodeSLL2
 };
 
 /**
- * Define TypeSLL2Node as Type of NodeSLL2
+ * Define TypeSLLNode as Type of NodeSLL2
  */
 typedef struct NodeSLL2 TypeSLL2Node;  //Define one Type of this element
 
@@ -52,9 +52,9 @@ struct NodeSLL2* insertSLL2Node (struct NodeSLL2* list, TypeSLL2Data data);
 //Print all elements of one list
 void printSLL2List(struct NodeSLL2* list);
 //Remove entire list, i.e., free memory usage of all elements
-void removeSL2LList(struct NodeSLL2* list);
+struct NodeSLL2* removeSLL2List(struct NodeSLL2* list, TypeSLL2Data data);
 //Remove one node with one respective data value and return resultant list
-struct NodeSLL2* removeSLL2LList(struct NodeSLL2* list, TypeSLL2Data data);
+struct NodeSLL2* removeSLL2List(struct NodeSLL2* list, TypeSLL2Data data);
 //Search for one data in one list
 struct NodeSLL2* searchSLL2Node( struct NodeSLL2* list, TypeSLL2Data data);
 
@@ -121,7 +121,7 @@ void printSLL2List(struct NodeSLL2* list)
     {
         for ( aux=list; aux!=NULL; aux=aux->next)
         {
-            printf("Quantidade %3.i: Palavra: %s\n", aux->data.quantidade , aux->data.item );
+            printf("Item: %s\n", aux->data.item);
         }
     }
 }
@@ -152,7 +152,7 @@ void removeSL2LList(struct NodeSLL2* list)
  * @param[in] data Data for search to remove
  * @return list Resultant list
  */
-struct NodeSLL2* removeSLL2LList(struct NodeSLL2* list, TypeSLL2Data data)
+struct NodeSLL2* removeSLL2List(struct NodeSLL2* list, TypeSLL2Data data)
 {
     struct NodeSLL2* last = NULL;
     struct NodeSLL2* aux = list;

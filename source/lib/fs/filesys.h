@@ -1,7 +1,7 @@
 /**
  * @file filesys.h
  * @details Corretor Ortografico - Filesystem
- * @version 0.1alpha
+ * @version 0.3beta
  * @author Emerson Rocha Luiz
  * @copyright MIT. See license.txt
  */

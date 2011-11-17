@@ -3,6 +3,7 @@ CorretorOrtografico.depend
 CorretorOrtografico.layout
 /obj/
 /bin/
+/doc/html/*
 !/doc/html.zip #permitir upload deste arquivo zip
 
 # Compiled source #

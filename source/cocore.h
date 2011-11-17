@@ -1,7 +1,7 @@
 /**
  * @file cocore.h
  * @details Corretor Ortografico - Core
- * @version 0.1alpha
+ * @version 0.3beta
  * @author Emerson Rocha Luiz
  * @copyright MIT. See license.txt
  */
@@ -267,7 +267,7 @@ void coSaida()
 /**
  *
  * @see http://www.chemie.fu-berlin.de/chemnet/use/info/libc/libc_4.html
- *
+ * @todo Analiza e' com z, nao com s.
  *
  */
 int coTextoAnalisa( COMemType *Memoria, char *content)
@@ -319,13 +319,13 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
     strcpy( proximo.item, Node->data.item);
     //Procurar o proximo
 
-    struct NodeSLL2 *Palavras = initializeSLL2();;
+    //struct NodeSLL2 *Palavras = initializeSLL2();;
     TypeSLL2Data Termo;
 
     start = dbProfileStart();
     printf("\n");
     printf("|-------------------------------------------------------|\n");
-    printf("  NUMERO (K)  |  FREQUENCIA  |   ERRO                    \n");
+    printf("  NUMERO (K) |  FREQUENCIA  |   ERRO                    \n");
     while (j < palavras || Node != NULL)
     {
         while( searchSLLNode( Node, procurado )!= NULL )
@@ -337,12 +337,12 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
         Termo.quantidade = l;
 
         TypeSLLData termopesquisado;
-        strcpy( termopesquisado.item ,procurado.item);
+        strcpy( termopesquisado.item, procurado.item);
 
-        if (searchSLLNode(Memoria->dicionarios->definicoes, termopesquisado ) != NULL)
+        if (searchSLLNode(Memoria->dicionarios->definicoes, termopesquisado ) == NULL)
         {
-            if ( procurado.item > numerodeerros){
-                printf("    %3.i  | %3.i     |  %s \n", Termo.quantidade, Termo.quantidade, procurado.item );
+            if ( Termo.quantidade > numerodeerros){
+                printf("    %3.i      |   %3.i        |  %s \n", Termo.quantidade, Termo.quantidade, procurado.item );
             }
         }
         //printSLLList(Memoria->dicionarios->definicoes);

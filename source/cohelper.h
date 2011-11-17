@@ -1,3 +1,11 @@
+/**
+ * @file cohelper.h
+ * @details Corretor Ortografico - Core
+ * @version 0.3beta
+ * @author Emerson Rocha Luiz
+ * @copyright MIT. See license.txt
+ */
+
 #ifndef COHELPER_H_INCLUDED
 #define COHELPER_H_INCLUDED
 
@@ -270,7 +278,6 @@ int cohTextoCarrega( COMemType *Memoria, char *path, char *idioma , char *descri
     else
     {
         //O Objeto atual de texto esta preenchido. Carregar o proximo
-
         TextoType *newItem;
         TextoType *last = NULL;
         TextoType *aux = Memoria->textos;
@@ -282,7 +289,6 @@ int cohTextoCarrega( COMemType *Memoria, char *path, char *idioma , char *descri
         strcpy(newItem->completo, content);
         strcpy(newItem->idioma, idioma);
         strcpy(newItem->titulo, descricao);
-
 
         while (( aux != NULL ) && ( strcmp(aux->completo, newItem->completo ) < 0 ))
         {
@@ -301,9 +307,6 @@ int cohTextoCarrega( COMemType *Memoria, char *path, char *idioma , char *descri
             newItem->proximo = last->proximo;
             last->proximo = newItem;
         }
-
-
-
     }
     return tamanho;
 }
