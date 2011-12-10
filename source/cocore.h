@@ -184,6 +184,7 @@ int coOpcaoQuestiona( int min, int max )
     scanf("%i", &entrada);
     while ( !(entrada >= min) || !(entrada <=max) )
     {
+        fflush ( stdin );//Garante que e' menor que o minimo para resetar esta variavel
         printf("\nCorretorOrtografico: Resposta nao conforme Informe um valor valido entre %i e %i\n\n  Novo valor>", min, max);
         scanf("%i", &entrada);
     }
@@ -199,45 +200,45 @@ void coListarOpcoes( int opcao)
     switch ( opcao )
     {
     case 0:
-        printf("\n|---------------------GERAL----------------------|");
-        printf("\n| 1 - Gerenciar dicionarios                      |");
-        printf("\n| 2 - Gerenciar textos                           |");
-        printf("\n| 3 - Alterar definicoes desde programa          |");
-        printf("\n| 4 - Debug                                      |");
-        printf("\n| 5 - Creditos                                   |");
-        printf("\n| 0 - Encerra o programa                         |");
-        printf("\n|------------------------------------------------|");
+        printf("\n -------------------------------------GERAL----------------------------------- ");
+        printf("\n| 1 - Gerenciar dicionarios                                                   |");
+        printf("\n| 2 - Gerenciar textos                                                        |");
+        printf("\n| 3 - Alterar definicoes desde programa                                       |");
+        printf("\n| 4 - Debug                                                                   |");
+        printf("\n| 5 - Creditos                                                                |");
+        printf("\n| 0 - Encerra o programa                                                      |");
+        printf("\n ----------------------------------------------------------------------------- ");
         printf("\n\n  GERAL> ");
         break;
     case 1:
-        printf("\n|------------------DICIONARIO--------------------|");
-        printf("\n| 1 - Adicionar dicionario                       |");
-        printf("\n| 2 - Editar dicionario existente                |");
-        printf("\n| 3 - Remover dicionario                         |");
-        printf("\n| 0 - Volta ao menu anterior                     |");
-        printf("\n|------------------------------------------------|");
+        printf("\n|-----------------------------------DICIONARIO--------------------------------|");
+        printf("\n| 1 - Adicionar dicionario                                                    |");
+        printf("\n| 2 - Editar dicionario existente                                             |");
+        printf("\n| 3 - Remover dicionario                                                      |");
+        printf("\n| 0 - Volta ao menu anterior                                                  |");
+        printf("\n|-----------------------------------------------------------------------------|");
         printf("\n\n  DICIONARIO> ");
         break;
     case 2:
-        printf("\n|---------------------TEXTO----------------------|");
-        printf("\n| 1 - Adicionar texto                            |");
-        printf("\n| 2 - (Re)Analizar texto                         |");
-        printf("\n| 3 - Editar texto                               |");
-        printf("\n| 4 - Remover texto                              |");
-        printf("\n| 0 - Volta ao menu anterior                     |");
-        printf("\n|------------------------------------------------|");
+        printf("\n|-------------------------------------TEXTO-----------------------------------|");
+        printf("\n| 1 - Adicionar texto                                                         |");
+        printf("\n| 2 - (Re)Analizar texto                                                      |");
+        printf("\n| 3 - Editar texto                                                            |");
+        printf("\n| 4 - Remover texto                                                           |");
+        printf("\n| 0 - Volta ao menu anterior                                                  |");
+        printf("\n|-----------------------------------------------------------------------------|");
         printf("\n\n  TEXTO> ");
         break;
     case 3:
-        printf("\n|------------------DEFINICOES--------------------|");
-        printf("\n| 0 - Volta ao menu anterior                     |");
-        printf("\n|------------------------------------------------|");
+        printf("\n|-----------------------------------DEFINICOES---------------------------------|");
+        printf("\n| 0 - Volta ao menu anterior                                                   |");
+        printf("\n|------------------------------------------------------------------------------|");
         printf("\n\n  DEFINICOES> \n");
         break;
     case 4:
-        printf("\n|---------------------DEBUG----------------------|");
-        printf("\n| 0 - Volta ao menu anterior                     |");
-        printf("\n|------------------------------------------------|");
+        printf("\n|-------------------------------------DEBUG------------------------------------|");
+        printf("\n| 0 - Volta ao menu anterior                                                   |");
+        printf("\n|-----------------------------------D------------------------------------------|");
         printf("\n\n  DEBUG> ");
         break;
     case 5:
@@ -408,13 +409,6 @@ void coTextoOpcoes( COMemType *Memoria )
         }
     }
     coTextoAnalisa(Memoria, Memoria->textos->completo );
-
 }
-
-
-
-
-
-
 
 #endif // COCORE_H_INCLUDED
