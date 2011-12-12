@@ -251,6 +251,9 @@ struct NodeSLL* removeSLLNode(struct NodeSLL* list, TypeSLLData data)
  */
 struct NodeSLL* searchSLLNode( struct NodeSLL* list, TypeSLLData data)
 {
+    if (list == NULL){
+        return NULL;
+    }
     struct NodeSLL* last = NULL;
     struct NodeSLL* aux = list;
 

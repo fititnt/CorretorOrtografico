@@ -39,8 +39,8 @@ int main()
     //cohTextoCarrega(Memoria, "C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/testes/en/teste-b.txt", "en", "teste-b.txt");
     //cohTextoCarrega(Memoria, "C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/testes/en/teste-b.txt", "en", "teste-b.txt");
 
-    //cohTextoCarrega(Memoria, "C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/testes/en/texto2.txt", "en", "texto1.txt");
-    cohTextoCarrega(Memoria, "C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/testes/en/texto2.txt", "en", "texto2.txt");
+    cohTextoCarrega(Memoria, "C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/testes/en/texto2.txt", "en", "texto1.txt");
+    //cohTextoCarrega(Memoria, "C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/testes/en/texto2.txt", "en", "texto2.txt");
     //cohTextoCarrega(Memoria, "C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/testes/croata/t02-croata-gremio.txt", "croata", "t02-croata-gremio.txt");
     //cohTextoCarrega(Memoria, "C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/testes/en/teste-b.txt", "en", "teste-b.txt");
 

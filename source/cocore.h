@@ -375,10 +375,8 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
             gPalavra->proxima = (struct PalavraExplicada*)malloc(sizeof(struct PalavraExplicada));
             gPalavra->proxima->linhas = (struct linhas*)malloc(sizeof(struct linhas));
             gPalavra->proxima->linhas->linha = (int)malloc(sizeof(int));
+            //gPalavra->proxima = NULL;
 
-            if(palavras == 1){
-                //gPalavra->proxima = NULL;
-            }
             gPalavra = gPalavra->proxima;
         }
         if(isalnum(content[i]) || content[i] == '\'')//Se for alfanumerico
@@ -387,43 +385,71 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
             ++letras;
         }
     }
+    //gPalavra->ordem = -1;
+
     //printf("Palavra %4.i, Tamanho:%2.i, Linha: %2.i, Termo:%s\n",gPalavraRoot->ordem, gPalavraRoot->tamanho, gPalavraRoot->linha, gPalavraRoot->termo );
     gPalavra = gPalavraRoot;
-    while (gPalavra != NULL){
-        printf("Palavra %4.i, Tamanho:%2.i, Linha: %2.i, Termo:%s\n",gPalavra->ordem,
-               gPalavra->tamanho,
+    /*
+    while (gPalavra != NULL && --letras != 5){
+        printf("Palavra %4.i, Tamanho:%2.i, Linha: %2.i, Termo:%s\n",gPalavra->ordem,gPalavra->tamanho,
                gPalavra->linhas->linha,
                gPalavra->termo );
-        //return;
         if (gPalavra != NULL){
             gPalavra = gPalavra->proxima;
         }
     }
+    */
 
-
-    //printSLLList(Nodo);
+    printSLLList(Nodo);
     //Insere o Nodo novamente na memoria
     Memoria->textos->analise->palavras->item = Nodo;
     //Utiliza o Nodo para obter outros calculos
 
     /// Agrupa Termos
-    struct DataSLL procurado;
+    TypeSLLData procurado, proximo;
+    struct NodeSLL* last;// = NULL;
+    last = NULL;
+    struct NodeSLL* aux;// = list;
+
     while(Nodo != NULL){
         procurado = Nodo->data;
         NodoAgrupado = insertSLLNode(NodoAgrupado, procurado);
         do {
-            Nodo = removeSLLNode(Nodo, procurado);
-            //printf("%i %s,",++tmp, procurado.item);
+            printf("%i %s,",++tmp, procurado.item);
+            //Nodo = removeSLLNode(Nodo, procurado);
+            aux = Nodo;
+            while (aux !=NULL && (strcmp(aux->data.item, data.item)))
+            {
+                last = aux;
+                aux = aux->next;
+
+            }
+            if (aux == NULL)
+            {
+                break;
+            }
+
+            if (last == NULL)
+            {
+                Nodo = aux->next;
+            }
+            else
+            {
+                last->next = aux->next;
+            }
+
+
+            //printf(">%i %s,",++tmp, procurado.item);
             ++tmp;
         } while ( Nodo != NULL && searchSLLNode(Nodo, procurado)!= NULL);
-        //printf("%i %s,\n",tmp, procurado.item);
+        printf("%i %s,\n",tmp, procurado.item);
         tmp = 0;
         if (Nodo != NULL){
             Nodo = Nodo->next;
         }
     }
     //printSLLList(NodoAgrupado);
-
+    //return;
     struct GrupoPalavras* GPalavrasAnalizadas = (struct GrupoPalavras*)malloc(sizeof(struct GrupoPalavras));
     Memoria->textos->analise->termosAnalizados = GPalavrasAnalizadas;
     gPalavra = gPalavraRoot;
