@@ -35,12 +35,11 @@ int main()
     Memoria = cohInicializaMemoria(Memoria);
 
     //cohTextoCarrega(Memoria, "C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/testes/en/texto1.txt", "en", "texto1.txt");
-    //cohCarregaDicionario(Memoria, "C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/dicionarios/en.dic", "en");
-
+    cohCarregaDicionarioOtimizada(Memoria, "C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/dicionarios/en.dic", "en");
     //cohTextoCarrega(Memoria, "C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/testes/en/teste-b.txt", "en", "teste-b.txt");
     //cohTextoCarrega(Memoria, "C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/testes/en/teste-b.txt", "en", "teste-b.txt");
 
-    //cohTextoCarrega(Memoria, "C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/testes/en/texto2.txt", "en", "texto2.txt");
+    cohTextoCarrega(Memoria, "C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/testes/en/texto2.txt", "en", "texto2.txt");
     //cohTextoCarrega(Memoria, "C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/testes/en/texto6.txt", "en", "texto6.txt");
     //cohTextoCarrega(Memoria, "C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/testes/en/teste-b.txt", "en", "teste-b.txt");
 

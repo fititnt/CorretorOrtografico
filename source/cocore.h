@@ -303,16 +303,33 @@ void coSaida()
 int coTextoAnalisa( COMemType *Memoria, char *content)
 {
     clock_t start;
-    TypeSLLNode *Node = initializeSLL();
+    if (Memoria->textos->analise == NULL)
+    {
+        Memoria->textos->analise = (struct AnaliseOrtografica*)malloc(sizeof(struct AnaliseOrtografica));
+        Memoria->textos->analise->palavras = NULL;
+    }
+    if (Memoria->textos->analise->palavras == NULL)
+    {
+        Memoria->textos->analise->palavras = (struct Palavras*)malloc(sizeof(struct Palavras));
+        //Memoria->textos->analise->palavras
+    }
+    if (Memoria->textos->analise->palavras->item == NULL)
+    {
+        Memoria->textos->analise->palavras->item = (TypeSLLNode*)malloc(sizeof(TypeSLLNode));
+        Memoria->textos->analise->palavras->item = NULL;
+    }
+    //Memoria->textos->analise->palavras->item = initializeSLL(); //TypeSLLNode *Node = initializeSLL();
     TypeSLLData data;
+
     int i, letras = 0, palavras = 0, quebraDePalavra = 0;
     char buffer[100];
     int tamanho = strlen(content);
     int numerodeerros = 0;
-    printf("\n\n\n\n Insira o numero K:\n");
+    printf("\n\n\n\n Insira o numero K:\n  >");
     numerodeerros = coOpcaoQuestiona(0, 100);
 
     start = dbProfileStart();
+
     for(i=0; i<=tamanho; ++i)
     {
         if( (isspace(content[i]) && !content[i] != '\'') || i==tamanho)// '  ',\f ,\n ,\r, \t, \v
@@ -323,7 +340,8 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
             }
             buffer[letras] = '\0';//Fecha string
             strcpy( data.item , buffer);
-            Node = insertSLLNode(Node,data);
+            Memoria->textos->analise->palavras = insertSLLNode(Memoria->textos->analise->palavras, data);//Node = insertSLLNode(Node,data);
+            //return;
             ++palavras;
             letras = 0;
             quebraDePalavra = 1;
@@ -336,9 +354,12 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
         }
     }
     //printSLLList(Node);
-    //printf("quantidade %i\n\n", palavras);
+    Memoria->textos->analise->qtdPalavras = palavras;
+    printf("quantidade %i (%i)\n\n", palavras, Memoria->textos->analise->qtdPalavras);
+    //printSLLList(Memoria->textos->analise->palavras);///Imprimime a lista de palavras carregadas
 
-
+    return;
+    /*
     //Reorganiza lista
     int j = 0, k = 0, l = 0;
     //struct NodeSLL* noAuxiliar = initializeSLL();//Criado no auxiliar
@@ -390,7 +411,7 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
     printf("\nTempo de carregamento e analise do texto:\n   ");
     dbProfileEnd( start );
     //printSLL2List(Palavras);
-
+    */
     return 1;
 }
 

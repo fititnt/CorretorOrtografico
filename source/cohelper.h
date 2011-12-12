@@ -64,6 +64,13 @@ struct Dicionarios
     DicionariosType *proximo;
 };
 
+struct Palavras {
+    int errado;
+    int linha;
+    //char *termo;
+    struct NodeSLL *item;
+};
+
 /**
  * Estrutura que define a reuniao de informacoes sobre analise ortografica de
  * um texto especifico
@@ -72,7 +79,8 @@ struct Dicionarios
  */
 struct AnaliseOrtografica
 {
-    //
+    struct Palavras *palavras;//struct NodeSLL *palavras;
+    int qtdPalavras;
 };
 
 typedef struct Textos TextoType;
@@ -91,14 +99,17 @@ typedef struct Textos TextoType;
  */
 struct Textos
 {
-    struct Palavras *palavras;
+    //struct Palavras *palavras;
     struct Dicionarios *dicionario;
     struct AnaliseOrtografica *analise;
     char *completo; //2560000
     char *idioma; //50
     char *titulo; //50
+    int tamanho;
     TextoType *proximo;
 };
+
+
 
 /**
  *
@@ -280,7 +291,6 @@ int cohCarregaDicionarioOtimizada( COMemType *Memoria, char *path, char *idioma 
 }
 
 
-
 /**
  *
  * @param[in,out] Memoria Objeto global de memoria
@@ -306,6 +316,7 @@ int cohTextoCarrega( COMemType *Memoria, char *path, char *idioma , char *descri
     {
         Memoria->textos = malloc(sizeof(TextoType));
         //Memoria->textos->palavras
+        Memoria->textos->tamanho = tamanho;
         Memoria->textos->analise = NULL;
         Memoria->textos->completo = NULL;
         Memoria->textos->dicionario = NULL;
@@ -318,6 +329,7 @@ int cohTextoCarrega( COMemType *Memoria, char *path, char *idioma , char *descri
         Memoria->textos->idioma = malloc(sizeof(char)*50);
         Memoria->textos->titulo = malloc(sizeof(char)*50);
         Memoria->textos->completo = malloc(sizeof(char)*2560000);
+        Memoria->textos->tamanho = tamanho;
 
         strcpy(Memoria->textos->idioma, idioma);
         strcpy(Memoria->textos->titulo, descricao);
@@ -334,6 +346,7 @@ int cohTextoCarrega( COMemType *Memoria, char *path, char *idioma , char *descri
         newItem->idioma = malloc(sizeof(char)*50);
         newItem->titulo = malloc(sizeof(char)*50);
         newItem->completo = malloc(sizeof(char)*2560000);
+        newItem->tamanho = tamanho;
         strcpy(newItem->completo, content);
         strcpy(newItem->idioma, idioma);
         strcpy(newItem->titulo, descricao);
