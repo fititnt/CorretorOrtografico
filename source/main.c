@@ -60,7 +60,7 @@ int main()
             switch ( subacao )
             {
             case 1: //Adicionar dicionario
-                coDicionarioCarrega( Memoria );
+                coDicionarioCarregaOtimizada( Memoria );
                 break;
             case 2: //Editar dicionario existente
                 //coDicionarioGerencia();

@@ -130,6 +130,35 @@ void coDicionarioCarrega( COMemType *Memoria )
     cohCarregaDicionario( Memoria, path, idioma);
 }
 
+
+void coDicionarioCarregaOtimizada( COMemType *Memoria )
+{
+    char path[255];
+    char idioma[50];
+
+    printf("\nCorretorOrtografico: Insira caminho para o arquivo");
+    printf("\n arquivo> ");
+    fsGetStr( path );
+    while( !fsFileOpen( path ) )  //@todo checar se arquivo existe e pode ser lido
+    {
+        printf("\nCorretorOrtografico: O Arquivo nao foi encontrado, ou nao esta disponivel para leitura. Revise:");
+        printf("\n arquivo> ");
+        fsGetStr( path );
+    }
+    printf("\nCorretorOrtografico: Nome do idioma:");
+    printf("\n idioma> ");
+    fsGetStr( idioma );
+
+    //Se o dicionario e' NULL, quer dizer que foi recentemente inicializado,
+    //logo, precisa-se alocar mais espaco em memoria para alguns itens
+    if ( Memoria->dicionarios == NULL )
+    {
+        //Memoria->dicionarios = cohInicializaDicionarios(Memoria->dicionarios);
+    }
+
+    cohCarregaDicionarioOtimizada( Memoria, path, idioma);
+}
+
 /**
  * Interface com o usuario que exibe informacoes pertinetnes de debug
  *

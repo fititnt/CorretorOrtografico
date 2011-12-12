@@ -70,7 +70,7 @@ struct NodeSLL* initializeSLL(void)
 /**
  * Insert one new value to the list
  *
- * @param[in] list List to search
+ * @param[in] list
  * @param[in] data Data for insert
  * @return TypeSLLNode list: Resultant list
  */
@@ -99,6 +99,60 @@ struct NodeSLL* insertSLLNode (struct NodeSLL* list, TypeSLLData data)
         newItem->next = last->next;
         last->next = newItem;
     }
+    return list;
+}
+
+/**
+ * Import data to SSL from one string
+ *
+ * @param[in] list
+ * @param[in] string Data for insert
+ * @param[in] len leigth of string
+ * @return TypeSLLNode list: Resultant list
+ */
+struct NodeSLL* importStringSLL (struct NodeSLL* list, char *string, int len, int *amount)
+{
+    char *word;
+    TypeSLLData wordData;
+    struct NodeSLL* newItem;
+    struct NodeSLL* last = NULL;
+    struct NodeSLL* aux = list;
+    newItem = malloc(sizeof(TypeSLLData));
+
+    amount = 0;
+    word = strtok (string," \n\t");
+    while(word != NULL)
+    {
+        printf("\n%s", word);
+        word = strtok (NULL," \n\t");
+        if (word!= NULL){
+            return list;
+        }
+
+        strcpy(wordData.item, word);
+        newItem->data = wordData;
+
+        while (( aux != NULL ) && ( strcmp(aux->data.item, wordData.item ) < 0 ))
+        {
+            last = aux;
+            aux = aux->next;
+        }
+        if (last == NULL)
+        {
+            //If last does not exist, insert at start of the list
+            newItem->next = list;
+            list = newItem;
+        }
+        else
+        {
+            //Last exist, so insert at middle of list
+            newItem->next = last->next;
+            last->next = newItem;
+        }
+        ++amount;
+    }
+
+
     return list;
 }
 

@@ -43,7 +43,7 @@ struct Benchmarks
 /**
  *
  */
- typedef struct Dicionarios DicionariosType;
+typedef struct Dicionarios DicionariosType;
 
 /**
  *
@@ -103,7 +103,7 @@ struct Textos
 /**
  *
  */
- typedef struct COMem COMemType;
+typedef struct COMem COMemType;
 
 /**
  * Struct para conter informacoes pertinentes a respeito do CorretorOrtografico
@@ -234,6 +234,53 @@ int cohCarregaDicionario( COMemType *Memoria, char *path, char *idioma )
     }
 }
 
+int cohCarregaDicionarioOtimizada( COMemType *Memoria, char *path, char *idioma )
+{
+    //char line[256];
+    char *string;
+    double i = 0;
+    clock_t start;
+    int len = 0, amount;
+
+
+    //TypeSLLData definicao;
+
+    if (Memoria->dicionarios == NULL)
+    {
+        Memoria->dicionarios = malloc(sizeof(DicionariosType));
+    }
+
+    Memoria->dicionarios->definicoes = initializeSLL();
+    //Memoria->dicionarios->quantia = 2.0;
+
+    FILE *file = fopen ( path , "r" );//C:/Users/fititnt/github/fititnt/CorretorOrtografico/source/dicionarios/en.dic
+    if ( file != NULL)
+    {
+
+        start = dbProfileStart();
+        fseek(file, 0, SEEK_END);
+        len = ftell(file);
+        fseek(file, 0, SEEK_SET);
+
+        string  = (char*)malloc(len*sizeof(char));
+
+        fread(string, sizeof(char), len, file);
+        importStringSLL(Memoria->dicionarios->definicoes, string, len, &amount);
+        free(string);
+
+        printf("\nTempo de %i termos carregados do do dicionario:\n   ", amount);
+        dbProfileEnd( start );
+
+        return i; //Retorna a quantidade de linhas adicionadas
+    }
+    else
+    {
+        return -1;//Erro de abertura
+    }
+}
+
+
+
 /**
  *
  * @param[in,out] Memoria Objeto global de memoria
@@ -248,7 +295,8 @@ int cohTextoCarrega( COMemType *Memoria, char *path, char *idioma , char *descri
     char *content;
     tamanho = fsFileToString(path, &content);
 
-    if (tamanho < 0){
+    if (tamanho < 0)
+    {
         printf("\nCorretorOrtografico: ERRO! Arquivo nao foi encontrado");
         return -1;
     }
