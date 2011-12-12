@@ -76,9 +76,25 @@ struct Palavras {
     struct NodeSLL* item;//
 };
 
+struct linhas {
+    int linha;
+    struct linhas* proxima;
+};
+
+struct PalavraExplicada{
+    int ordem;
+    int tamanho;
+    //int linha;
+    char termo[100];
+    struct linhas* linhas;
+    struct PalavraExplicada *anterior;
+    struct PalavraExplicada *proxima;
+}tPalavraExplicada;
+
 struct GrupoPalavras {
     int errado;
     int quantidade;
+    struct linhas* linhas;
     char termo[100];
     struct GrupoPalavras* proximo;
 };
