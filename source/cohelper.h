@@ -78,7 +78,9 @@ struct Palavras {
 
 struct GrupoPalavras {
     int errado;
-    struct NodeSLL* item;
+    int quantidade;
+    char termo[100];
+    struct GrupoPalavras* proximo;
 };
 
 /**
@@ -89,7 +91,8 @@ struct GrupoPalavras {
  */
 struct AnaliseOrtografica
 {
-    struct Palavras *palavras;//struct NodeSLL *palavras;
+    struct Palavras* palavras;//struct NodeSLL *palavras;
+    struct GrupoPalavras* termosAnalizados;
     int qtdPalavras;
 };
 

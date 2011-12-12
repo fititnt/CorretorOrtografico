@@ -302,7 +302,7 @@ void coSaida()
  */
 int coTextoAnalisa( COMemType *Memoria, char *content)
 {
-    int tmp;
+    int tmp = 0;
     clock_t start;
     if (Memoria->textos->analise == NULL)
     {
@@ -340,7 +340,7 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
         if (content[i] == '\n')
         {
             ++linha;
-            printf("\n%i", linha);
+            //printf("\n%i", linha);
         }
 
         if( (isspace(content[i]) && !content[i] != '\'') || i==tamanho)// '  ',\f ,\n ,\r, \t, \v
@@ -370,24 +370,41 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
             ++letras;
         }
     }
+    //printSLLList(Nodo);
     //Insere o Nodo novamente na memoria
     Memoria->textos->analise->palavras->item = Nodo;
     //Utiliza o Nodo para obter outros calculos
-    while(Nodo->next != NULL){
-        NodoAuxiliar = Nodo;
-        NodoAgrupado = insertSLLNode(NodoAgrupado, NodoAuxiliar->data);
+
+    struct DataSLL procurado, proximo;
+    while(Nodo != NULL){
+        procurado = Nodo->data;
+        NodoAgrupado = insertSLLNode(NodoAgrupado, procurado);
+        do {
+            Nodo = removeSLLNode(Nodo, procurado);
+            //printf("%i %s,",++tmp, procurado.item);
+            ++tmp;
+        } while ( Nodo != NULL && searchSLLNode(Nodo, procurado)!= NULL);
+        printf("%i %s,\n",tmp, procurado.item);
+        tmp = 0;
+
+        /*
         do {
             NodoAuxiliar = searchSLLNode(NodoAuxiliar, Nodo->data);
             if (NodoAuxiliar != NULL){
                 NodoAuxiliar = removeSLLNode(NodoAuxiliar, Nodo->data);
+                //Nodo = removeSLLNode(Nodo, NodoAuxiliar->data);
             }
             printf("%i,",++tmp);
         } while (NodoAuxiliar != NULL);
-
-        Nodo = Nodo->next;
+        tmp = 0;
+        */
+        if (Nodo != NULL){
+            Nodo = Nodo->next;
+        }
     }
 
-    printSLLList(NodoAgrupado);
+    //printSLLList(NodoAgrupado);
+    //printSLLList(Nodo);
     //Memoria->textos->analise->qtdPalavras = palavras;
     //printf("quantidade %i (%i)\n\n", palavras, Memoria->textos->analise->qtdPalavras);
     //printSLLList(Memoria->textos->analise->palavras->item);///Imprimime a lista de palavras carregadas
