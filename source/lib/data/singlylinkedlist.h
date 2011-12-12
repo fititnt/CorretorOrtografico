@@ -209,7 +209,7 @@ struct NodeSLL* removeSLLNode(struct NodeSLL* list, TypeSLLData data)
 {
     struct NodeSLL* last = NULL;
     struct NodeSLL* aux = list;
-return;
+
     while (aux !=NULL && (strcmp(aux->data.item, data.item)))
     {
         last = aux;

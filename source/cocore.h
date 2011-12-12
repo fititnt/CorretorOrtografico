@@ -435,10 +435,35 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
         procurado = Nodo->data;
         NodoAgrupado = insertSLLNode(NodoAgrupado, procurado);
         do {
-            aux = Nodo;
-            printf("%i %s,%s \n",++tmp, aux->data.item, procurado.item);
+            //aux = Nodo;
+            //printf("%i %s,%s \n",++tmp, aux->data.item, procurado.item);
 
-            Nodo = removeSLLNode(Nodo, procurado);
+            //Nodo = removeSLLNode(Nodo, procurado);
+
+            struct NodeSLL* last;
+            last = NULL;
+            struct NodeSLL* aux = Nodo;
+
+            while (aux !=NULL && (strcmp(aux->data.item, procurado.item)))
+            {
+                last = aux;
+                aux = aux->next;
+                //printf("%i %s,%s \n",++tmp, aux->data.item, procurado.item);
+            }
+
+            if(aux == NULL){
+                break;
+            }
+            if (last == NULL)
+            {
+                Nodo = aux->next;
+            }
+            else
+            {
+                last->next = aux->next;
+            }
+
+
 
             /*
             while (aux !=NULL && (strcmp(aux->data.item, procurado.item)))
@@ -472,7 +497,7 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
         }
     }
 
-    //printSLLList(NodoAgrupado);
+    printSLLList(NodoAgrupado);
     //return;
     struct GrupoPalavras* GPalavrasAnalizadas = (struct GrupoPalavras*)malloc(sizeof(struct GrupoPalavras));
     GPalavrasAnalizadas->linhas = (struct linhas*)malloc(sizeof(struct linhas));
