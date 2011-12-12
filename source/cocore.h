@@ -302,6 +302,7 @@ void coSaida()
  */
 int coTextoAnalisa( COMemType *Memoria, char *content)
 {
+    int tmp;
     clock_t start;
     if (Memoria->textos->analise == NULL)
     {
@@ -321,17 +322,27 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
     //Memoria->textos->analise->palavras->item = initializeSLL(); //TypeSLLNode *Node = initializeSLL();
     TypeSLLData data;
 
-    int i, letras = 0, palavras = 0, quebraDePalavra = 0;
+    int i, letras = 0, palavras = 0, quebraDePalavra = 0, linha = 1;
     char buffer[100];
     int tamanho = strlen(content);
     int numerodeerros = 0;
     printf("\n\n\n\n Insira o numero K:\n  >");
     numerodeerros = coOpcaoQuestiona(0, 100);
 
+    struct NodeSLL* Nodo = initializeSLL();
+    struct NodeSLL* NodoAuxiliar = initializeSLL();
+    struct NodeSLL* NodoAgrupado = initializeSLL();
+
     start = dbProfileStart();
 
     for(i=0; i<=tamanho; ++i)
     {
+        if (content[i] == '\n')
+        {
+            ++linha;
+            printf("\n%i", linha);
+        }
+
         if( (isspace(content[i]) && !content[i] != '\'') || i==tamanho)// '  ',\f ,\n ,\r, \t, \v
         {
             if(letras == 0)
@@ -340,8 +351,14 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
             }
             buffer[letras] = '\0';//Fecha string
             strcpy( data.item , buffer);
-            Memoria->textos->analise->palavras = insertSLLNode(Memoria->textos->analise->palavras, data);//Node = insertSLLNode(Node,data);
-            //return;
+            Memoria->textos->analise->palavras->item = (struct NodeSLL*) malloc(sizeof(struct NodeSLL) );
+            //Memoria->textos->analise->palavras->item->next = (struct NodeSLL*) malloc(sizeof(struct NodeSLL) );
+            //Memoria->textos->analise->palavras->item->data = (TypeSLLData) malloc(sizeof(TypeSLLData) );
+            //printf("\n\t %s , (%i)\n", buffer, strlen(buffer));
+            //Memoria->textos->analise->palavras->item = insertSLLNode(Memoria->textos->analise->palavras->item, data);//Node = insertSLLNode(Node,data);
+
+            Nodo = insertSLLNode(Nodo, data);
+            //Memoria->textos->analise->palavras->linha = linha;
             ++palavras;
             letras = 0;
             quebraDePalavra = 1;
@@ -353,12 +370,30 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
             ++letras;
         }
     }
-    //printSLLList(Node);
-    Memoria->textos->analise->qtdPalavras = palavras;
-    printf("quantidade %i (%i)\n\n", palavras, Memoria->textos->analise->qtdPalavras);
-    //printSLLList(Memoria->textos->analise->palavras);///Imprimime a lista de palavras carregadas
+    //Insere o Nodo novamente na memoria
+    Memoria->textos->analise->palavras->item = Nodo;
+    //Utiliza o Nodo para obter outros calculos
+    while(Nodo->next != NULL){
+        NodoAuxiliar = Nodo;
+        NodoAgrupado = insertSLLNode(NodoAgrupado, NodoAuxiliar->data);
+        do {
+            NodoAuxiliar = searchSLLNode(NodoAuxiliar, Nodo->data);
+            if (NodoAuxiliar != NULL){
+                NodoAuxiliar = removeSLLNode(NodoAuxiliar, Nodo->data);
+            }
+            printf("%i,",++tmp);
+        } while (NodoAuxiliar != NULL);
 
-    return;
+        Nodo = Nodo->next;
+    }
+
+    printSLLList(NodoAgrupado);
+    //Memoria->textos->analise->qtdPalavras = palavras;
+    //printf("quantidade %i (%i)\n\n", palavras, Memoria->textos->analise->qtdPalavras);
+    //printSLLList(Memoria->textos->analise->palavras->item);///Imprimime a lista de palavras carregadas
+
+
+    return 1;
     /*
     //Reorganiza lista
     int j = 0, k = 0, l = 0;

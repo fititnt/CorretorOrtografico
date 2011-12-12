@@ -64,11 +64,21 @@ struct Dicionarios
     DicionariosType *proximo;
 };
 
+/**
+ *
+ * linha linha da respectiva palavra
+ * item Todas as palavras
+ */
 struct Palavras {
-    int errado;
+    //int errado;
     int linha;
     //char *termo;
-    struct NodeSLL *item;
+    struct NodeSLL* item;//
+};
+
+struct GrupoPalavras {
+    int errado;
+    struct NodeSLL* item;
 };
 
 /**
