@@ -370,7 +370,7 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
             gPalavra->linhas->proxima = (struct linhas*)malloc(sizeof(struct linhas));
             gPalavra->linhas->proxima->linha = (int)malloc(sizeof(int));
             strcpy(gPalavra->termo, data.item);
-
+            //printf("Palavra %4.i, Tamanho:%2.i, Linha: %2.i, Termo:%s\n",palavras, strlen(buffer), linha, data.item );
             //Inicializa proximo
             gPalavra->proxima = (struct PalavraExplicada*)malloc(sizeof(struct PalavraExplicada));
             gPalavra->proxima->linhas = (struct linhas*)malloc(sizeof(struct linhas));
@@ -385,6 +385,24 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
             ++letras;
         }
     }
+    gPalavra = NULL;
+    //strcpy(gPalavra->termo, "\0");
+    //printSLLList(Nodo);
+
+    //Remove lixo
+    /*
+    for(i =0 ; i<palavras; i++, gPalavra = gPalavra->proxima){
+        gPalavra = gPalavra->proxima;
+        if (i<palavras-2){
+            char tmp2[100]={};
+            gPalavra->proxima->termo = (char*)'';//NULL;
+            gPalavra->proxima->linhas = NULL;
+            gPalavra->proxima->tamanho = NULL;
+            break;
+        }
+    }
+    */
+
     //gPalavra->ordem = -1;
 
     //printf("Palavra %4.i, Tamanho:%2.i, Linha: %2.i, Termo:%s\n",gPalavraRoot->ordem, gPalavraRoot->tamanho, gPalavraRoot->linha, gPalavraRoot->termo );
@@ -400,25 +418,30 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
     }
     */
 
-    printSLLList(Nodo);
+    //printSLLList(Nodo);
     //Insere o Nodo novamente na memoria
     Memoria->textos->analise->palavras->item = Nodo;
     //Utiliza o Nodo para obter outros calculos
 
     /// Agrupa Termos
-    TypeSLLData procurado, proximo;
+    TypeSLLData procurado;
     struct NodeSLL* last;// = NULL;
     last = NULL;
     struct NodeSLL* aux;// = list;
+
+    printSLLList(Nodo);
 
     while(Nodo != NULL){
         procurado = Nodo->data;
         NodoAgrupado = insertSLLNode(NodoAgrupado, procurado);
         do {
-            printf("%i %s,",++tmp, procurado.item);
-            //Nodo = removeSLLNode(Nodo, procurado);
             aux = Nodo;
-            while (aux !=NULL && (strcmp(aux->data.item, data.item)))
+            printf("%i %s,%s \n",++tmp, aux->data.item, procurado.item);
+
+            Nodo = removeSLLNode(Nodo, procurado);
+
+            /*
+            while (aux !=NULL && (strcmp(aux->data.item, procurado.item)))
             {
                 last = aux;
                 aux = aux->next;
@@ -435,49 +458,84 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
             }
             else
             {
+                printf("Removido 1 (%s)", procurado.item);
                 last->next = aux->next;
             }
-
-
+            */
             //printf(">%i %s,",++tmp, procurado.item);
             ++tmp;
         } while ( Nodo != NULL && searchSLLNode(Nodo, procurado)!= NULL);
-        printf("%i %s,\n",tmp, procurado.item);
+        //printf("%i %s,\n",tmp, procurado.item);
         tmp = 0;
         if (Nodo != NULL){
             Nodo = Nodo->next;
         }
     }
+
     //printSLLList(NodoAgrupado);
     //return;
     struct GrupoPalavras* GPalavrasAnalizadas = (struct GrupoPalavras*)malloc(sizeof(struct GrupoPalavras));
-    Memoria->textos->analise->termosAnalizados = GPalavrasAnalizadas;
-    gPalavra = gPalavraRoot;
+    GPalavrasAnalizadas->linhas = (struct linhas*)malloc(sizeof(struct linhas));
+    GPalavrasAnalizadas->linhas->linha = (int)malloc(sizeof(int));
+    Memoria->textos->analise->termosAnalizados = GPalavrasAnalizadas;//Palavras ja agrupadas
+    gPalavra = gPalavraRoot;//Todas as palavras detalhadamente explicadas
     while(NodoAgrupado != NULL){
-
+        tmp = palavras;
         GPalavrasAnalizadas->errado = 0;
         strcpy(GPalavrasAnalizadas->termo, NodoAgrupado->data.item);
         //Memoria->textos->analise->termosAnalizados->linhas;
 
         gPalavra = gPalavraRoot;
-        while(gPalavra != NULL){
-            if (strcmp(gPalavra->termo, NodoAgrupado->data.item) == 0){
-                //GPalavrasAnalizadas->linhas->linha = gPalavra->linhas->linha;
-                //GPalavrasAnalizadas->linhas->proxima = (struct linhas*)malloc(sizeof(struct linhas));
-                printf("Igual!");
-                //return;
+        while(gPalavra != NULL && tmp != 0){
+            --tmp;
+            //printf("\n a: %s b: %s , (%i)\n", gPalavra->termo, NodoAgrupado->data.item, tmp);
+            if ( strcmp( gPalavra->termo, NodoAgrupado->data.item) == 0 ){
+                GPalavrasAnalizadas->linhas->linha = gPalavra->linhas->linha;
+                GPalavrasAnalizadas->proximo = (struct GrupoPalavras*)malloc(sizeof(struct GrupoPalavras));
+                GPalavrasAnalizadas->proximo->linhas = (struct linhas*)malloc(sizeof(struct linhas));
+                GPalavrasAnalizadas->linhas = GPalavrasAnalizadas->proximo->linhas;
+                //GPalavrasAnalizadas->proximo->linhas->linha = (int)malloc(sizeof(int));
+
+                //printf("Igual!");
+                //return 1;
             }
+            //printf("\n %s \n",GPalavrasAnalizadas->termo);
             gPalavra = gPalavra->proxima;
         }
-
-
-
+        /*
+        if (GPalavrasAnalizadas != NULL){
+            GPalavrasAnalizadas->proximo = (struct GrupoPalavras*)malloc(sizeof(struct GrupoPalavras));
+            GPalavrasAnalizadas->proximo->linhas = (struct linhas*)malloc(sizeof(struct linhas));
+            GPalavrasAnalizadas->proximo->linhas->linha = (int)malloc(sizeof(int));
+            GPalavrasAnalizadas->proximo->errado = (int)malloc(sizeof(int));
+            GPalavrasAnalizadas = GPalavrasAnalizadas->proximo;
+        }
+        */
         if (NodoAgrupado != NULL){
             NodoAgrupado = NodoAgrupado->next;
         }
     }
 
 
+    GPalavrasAnalizadas = Memoria->textos->analise->termosAnalizados;
+
+    printf("\n");
+    printf("|-------------------------------------------------------|\n");
+    printf("  NUMERO (K) |  FREQUENCIA  |   ERRO      | LINHAS      \n");
+
+    while(GPalavrasAnalizadas != NULL){
+
+        printf("    x        %i          %s                %i       \n",
+               GPalavrasAnalizadas->quantidade,
+               GPalavrasAnalizadas->termo ,
+               GPalavrasAnalizadas->linhas->linha);
+        break;
+        GPalavrasAnalizadas = GPalavrasAnalizadas->proximo;
+    }
+
+
+
+    printf("|-------------------------------------------------------|\n");
 
     /// Recheca linhas
     /*
@@ -500,15 +558,6 @@ int coTextoAnalisa( COMemType *Memoria, char *content)
     }
     */
 
-
-    for(i=0; i<=tamanho; ++i)
-    {
-        if (content[i] == '\n')
-        {
-            ++linha;
-            //printf("\n%i", linha);
-        }
-    }
 
 
     return 1;
